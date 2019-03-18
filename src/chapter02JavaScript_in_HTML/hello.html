@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Hello</title>
+    <!-- 此处置放的外部JavaScript代码下载解析执行完成之后才会显示页面，会有延迟；放在body标签中的不会-->
+    <script type="text/javascript" async></script>
+    <!-- async属性告诉浏览器立即下载外部JavaScript文件，不保证其加载执行顺序，因此含有async属性的JavaScript文件不应该依赖其他外部文件-->
+    <script type="text/javascript" async></script>
+</head>
+<body>
+
+<script>
+    function sayHi() {
+        alert("Hi!");
+    }
+
+    function sayScript() {
+        alert("<\/script>");
+    }
+</script>
+
+<!-- 与解析嵌入式JavaScript代码一样，解析外部JavaScript代码时页面的处理也会暂停-->
+<!-- .js的后缀非必须，浏览器不检查扩展名。但服务器看扩展名决定MIME应用类型，所以尽量保留-->
+<!-- defer属性：立即下载，延迟到页面加载好之后再执行 -->
+<!--已经引入外部JavaScript文件的script标记不应再添加嵌入代码，会被忽略-->
+<script src="hello.js" type="text/javascript" defer="defer">
+</script>
+//尾标省略只能在XHTML中兼容，HTML不接受，IE也不兼容
+</body>
+</html>
