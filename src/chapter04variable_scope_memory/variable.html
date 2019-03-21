@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter04</title>
+</head>
+<body>
+<a href="../chapter03basic_concepts/basical.html">BASIC CONCEPTS</a>
+<script>
+    var person = new Object();
+    person.name = "Nicholas";
+    document.write(person.name + "<br>");//Nicholas
+    document.write(person.toString() + "<br>");//[object Object]
+
+    function addTen(num) {
+        num += 10;
+        return num;
+    }
+
+    var count = 20;
+    var result = addTen(count);
+    document.write("count = " + count + "<br>");//count = 20
+    document.write("result = " + result + "<br>");//result = 30
+
+    document.write("person instanceof Object = " + (person instanceof Object) + "<br>");
+    document.write("count instanceof Number = " + (count instanceof Number) + "<br>");
+
+    var color = "blue";
+    function changeColor() {
+        var anotherColor = "red";
+        function swapColors() {
+            var temp = anotherColor;
+            anotherColor = color;
+            color = temp;
+        }
+        swapColors();//swapColors仅能在此范围内访问
+    }
+    changeColor();
+    document.write("color = " + color + "<br>");//color = red
+
+    function buildUrl(location) {
+        var qs = "?debug=true";
+        with (location) {
+            var url = href + qs;
+        }
+        return url;//此处的url不受with语句的局部变量范围控制，可以延长至此
+    }
+
+    if (true) { var colorN = "blue"}
+    document.write("colorN = " + colorN + "<br>");//colorN = blue JavaScript没有block级别的作用域，if、for、switch等语句产生的变量不属于局部变量
+    for (var i = 0; i < 10; i++) {
+        changeColor();
+    }
+    document.write("i = " + i + "<br>");//i = 10
+
+    function add(num1, num2) {
+        var sum = num1+num2;//在方法作用域外部使用这个sum会出错：Uncaught ReferenceError: sum is not defined
+        sumGlobal = num1+num2;//定义了一个全局变量
+        return sum;
+    }
+    add(1,2);
+    // document.write("sum = " + sum + "<br>");//Uncaught ReferenceError: sum is not defined
+    document.write("sumGlobal = " + sumGlobal + "<br>");//sumGlobal = 3
+</script>
+</body>
+</html>
