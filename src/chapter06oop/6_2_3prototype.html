@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter06 Prototype</title>
+</head>
+<body>
+<script type="text/javascript" src="objects.js"></script>
+<script type="text/javascript">
+    function sayAnObject(object) {
+        document.write("object = " + object + "<br>");
+    }
+
+    /*
+    * 原型模式：
+    *   每个函数都有一个prototype属性，指向某个对象的一个指针；
+    *   这个对象的用途：包含可以由特定类型所有实例共享的属性和方法（与Java类的static关键字的区别）
+    *
+    *   prototype就是通过调用构造函数而创建的实例的原型对象（无需在构造函数中定义实例的属性，而是将这些信息直接添加到原型）
+    * */
+    function People() {
+        sayAnObject(this)//实际调用此构造函数时，原型对象的信息已经添加好了
+    }
+
+    function sayName() {
+        alert(this.name);
+    }
+
+    var people = new People();
+
+    People.prototype.name = "Nicholas";
+    People.prototype.age = 29;
+    People.prototype.job = "Software Engineer";
+    People.prototype.sayName = sayName;
+
+    // People.prototype = {
+    //     constructor:People,
+    //     name: "Nicholas",
+    //     age: 29,
+    //     job: "Software Engineer",
+    //     sayName: sayName
+    // };
+
+    // people.sayName();//Nicholas
+
+    var people1 = new People();
+    // people1.sayName();//Nicholas
+    document.write("sayName.prototype.constructor = " + sayName.prototype.constructor + "<br>");
+    //sayName.prototype.constructor = function sayName() { alert(this.name); }
+    document.write("sayName.prototype = " + sayName.prototype + "<br>");
+    document.write("sayName.constructor = " + sayName.constructor + "<br>");
+
+    document.write("people.sayName == people1.sayName = " + (people.sayName === people1.sayName) + "<br>");
+    // people.sayName == people1.sayName = true
+    /*
+    * 协议内容：
+    *   1.自定义构造方法——原型对象——原型对象的constructor属性指向该自定义构造方法
+    *       访问构造方法的原型对象：People.prototype
+    *   2.调用构造方法产生的对象实例内部包含一个指向该构造方法的原型对象
+    *       访问实例的原型对象：__proto__属性 或者 Object.getPrototypeOf(people)
+    *   3."原型"这个连接存在于 实例与构造函数的原型对象 之间，而非 实例与构造函数 之间。
+    *   4.在实例上添加的属性会 覆盖 原型对象上的属性（只是覆盖，而非删除——揣摩这个特性与Java的区别）。这个覆盖过程的逆过程 是用delete关键字删除实例对象的新属性，而非将这个属性置空null
+    *       确定一个属性是实例属性还是原型对象的属性：people.hasOwnProperty("name")
+    *   5.in操作符的两种使用场景：
+    *         (1)单独使用："name" in people 等价于 people.hasOwnProperty("name") || people.__proto__.hasOwnProperty("name")
+    *         (2)在for-in循环中使用:返回所有可以通过对象访问、enumerable的属性——既包括对象自身的属性，也包括原型对象所拥有的属性
+    *               另外一个Object.keys(people)返回的数组：仅包括实例对象自有属性，不包括原型对象的，等价于所有的people.hasOwnProperty("name")
+    *               另外一个Object.getOwnPropertyNames(people)返回的数组：仅包括实例对象自有属性，不包括原型对象的，等价于所有可枚举、不可枚举的people.hasOwnProperty("name")
+    *   6.关于构造函数原型的constructor属性
+    *       默认生成的constructor属性enumerable特性为false
+    *       完全重新覆盖原型对象后constructor属性的enumerable特为true，除非使用Object.defineProperty指定为false（所以一般不建议完全重新指定构造函数的原型对象）
+    * */
+
+    sayAnObject(People.prototype);//[name] = Nicholas, [age] = 29, [job] = Software Engineer, [sayName] = function sayName() { alert(this.name); },
+    sayAnObject(sayName.prototype);//空白
+
+    document.write("(Object.getPrototypeOf(people) === People.prototype) = " + (Object.getPrototypeOf(people) === People.prototype) + "<br>");
+    //(Object.getPrototypeOf(people) === People.prototype) = true
+    document.write("(people.prototype === People.prototype) = " + (people.prototype === People.prototype) + "<br>");
+    sayAnObject(people.prototype);//空白
+    sayAnObject(people.__proto__);//[name] = Nicholas, [age] = 29, [job] = Software Engineer, [sayName] = function sayName() { alert(this.name); }
+    document.write("people.hasOwnProperty(\"__proto__\") = " + people.hasOwnProperty("__proto__") + "<br>");//false
+    sayAnObject(People.prototype);//[name] = Nicholas, [age] = 29, [job] = Software Engineer, [sayName] = function sayName() { alert(this.name); }
+    sayAnObject(Object.getPrototypeOf(people));//[name] = Nicholas, [age] = 29, [job] = Software Engineer, [sayName] = function sayName() { alert(this.name); }
+
+    document.write("People.prototype.constructor = " + People.prototype.constructor + "<br>");
+    document.write("sayName.prototype.constructor = " + sayName.prototype.constructor + "<br>");
+    // People.prototype.constructor = function People() { sayAnObject(this) }
+    // sayName.prototype.constructor = function sayName() { alert(this.name); }
+
+    document.write("People.constructor = " + People.constructor + "<br>");
+    document.write("people1.hasOwnProperty(\"name\") = " + people1.hasOwnProperty("name") + "<br>");//false
+    people1.name = "Greg";
+    document.write("people1.hasOwnProperty(\"name\") = " + people1.hasOwnProperty("name") + "<br>");//true
+    sayAnObject(people1);//[name] = Greg, [age] = 29, [job] = Software Engineer
+    document.write("People.prototype.isPrototypeOf(people1) = " + People.prototype.isPrototypeOf(people1) + "<br>");//true
+    document.write("people1.name = " + people1.name + "<br>");
+    people1.name = undefined;
+    document.write("people1.name = " + people1.name + "<br>");
+    document.write("Object.keys(people1) = " + Object.keys(people1) + "<br>");//Object.keys(people1) = name
+    document.write("Object.getOwnPropertyNames(People.prototype) = " + Object.getOwnPropertyNames(People.prototype) + "<br>");//constructor,name,age,job,sayName
+    document.write("People.prototype.hasOwnProperty(\"constructor\") = " + People.prototype.hasOwnProperty("constructor") + "<br>");//true
+    document.write("people1.hasOwnProperty(\"__proto__\") = " + people1.hasOwnProperty("__proto__") + "<br>");//false
+    document.write("Object.getOwnPropertyNames(people1) = " + Object.getOwnPropertyNames(people1) + "<br>");
+    delete people1.name;
+    document.write("Object.getOwnPropertyNames(people1) = " + Object.getOwnPropertyNames(people1) + "<br>");
+    document.write("Object.keys(people1) = " + Object.keys(people1) + "<br>");//Object.keys(people1) =
+    document.write("people1.name = " + people1.name + "<br>");
+    document.write("people1.hasOwnProperty(\"name\") = " + people1.hasOwnProperty("name") + "<br>");//false
+    sayAnObject(people1);//[name] = Nicholas, [age] = 29, [job] = Software Engineer
+    sayAnObject(People.prototype)//[name] = Nicholas, [age] = 29, [job] = Software Engineer
+    document.write("(\"name\" in people1) = " + ("name" in people1) + "<br>");//("name" in people1) = true
+
+    document.write("(people1 instanceof Object) = " + (people1 instanceof Object) + "<br>");
+    document.write("(people1 instanceof People) = " + (people1 instanceof People) + "<br>");
+    document.write("(people1.constructor == Object) = " + (people1.constructor == Object) + "<br>");
+    document.write("(people1.constructor == People) = " + (people1.constructor == People) + "<br>");
+    // (people1 instanceof Object) = true
+    // (people1 instanceof People) = true
+    // (people1.constructor == Object) = false
+    // (people1.constructor == People) = true
+
+    document.write("people1.constructor = " + people1.constructor + "<br>");//people1.constructor = function People() { sayAnObject(this) }
+    document.write("People.prototype.constructor = " + People.prototype.constructor + "<br>");//People.prototype.constructor = function People() { sayAnObject(this) }
+
+    function PersonNeo() {
+    }
+
+    /*
+    * 原型换这种写法，会导致实例的constructor变成Object(),匪夷所思
+    * */
+    PersonNeo.prototype = {
+        name: "Nicholas",
+        age: 29,
+        job: "Software Engineer",
+        friends: ["Jason", "Marty"],
+        sayName: sayName
+    };
+
+    var friend = new PersonNeo();
+    document.write("(friend instanceof Object) = " + (friend instanceof Object) + "<br>");
+    document.write("friend instanceof PersonNeo = " + (friend instanceof PersonNeo) + "<br>");
+    document.write("(friend.constructor === PersonNeo) = " + (friend.constructor == PersonNeo) + "<br>");
+    // (friend instanceof Object) = true
+    // friend instanceof PersonNeo = true
+    // (friend.constructor == Object) = true
+    // (friend.constructor === PersonNeo) = false
+    // document.write("(friend.prototype.constructor) = " + (friend.prototype.constructor) + "<br>");
+    //TypeError: friend.prototype is undefined
+    document.write("(PersonNeo.prototype.constructor) = " + (PersonNeo.prototype.constructor) + "<br>");
+    //(PersonNeo.prototype.constructor) = function Object() { [native code] }
+
+    PersonNeo.prototype.sayHi = function () {
+        alert("Hi, " + this.name);
+    };
+    // friend.sayName();//Nicholas
+    // friend.sayHi();//Hi,Nicholas
+
+    //原生对象的原型
+    // document.write("(\"Hello.world\".startWith(\"Hello\")) = " + ("Hello.world".startWith("Hello")) + "<br>");
+    // TypeError: "Hello.world".startWith is not a function
+    // JavaScript标准库的String类型并未定义startWith方法
+    String.prototype.startWith = function (text) {
+        return this.indexOf(text) === 0;
+    };
+    document.write("(\"Hello.world\".startWith(\"Hello\")) = " + ("Hello.world".startWith("Hello")) + "<br>");
+    //("Hello.world".startWith("Hello")) = true
+
+    document.write("Object.getOwnPropertyNames(String.prototype) = " + Object.getOwnPropertyNames(String.prototype) + "<br>");
+    // length,concat,match,padStart,padEnd,repeat,replace,search,split,anchor,big,bold,blink,fixed,fontcolor,fontsize,italics,
+    // link,small,strike,sub,sup,toString,valueOf,charAt,charCodeAt,codePointAt,indexOf,lastIndexOf,slice,substr,substring,
+    // toLowerCase,toUpperCase,localeCompare,toLocaleLowerCase,toLocaleUpperCase,trim,startsWith,endsWith,includes,normalize,
+    // trimStart,trimLeft,trimEnd,trimRight,constructor,startWith
+
+    var o = 2;
+    document.write("Object.getOwnPropertyNames(Number.prototype) = " + Object.getOwnPropertyNames(o.__proto__) + "<br>");
+    //  toLocaleString,valueOf,toFixed,toExponential,toPrecision,toString,constructor
+
+    document.write("Object.getOwnPropertyNames(Array.prototype) = " + Object.getOwnPropertyNames(Array.prototype) + "<br>");
+    // length,toString,values,toLocaleString,concat,fill,join,pop,push,reverse,shift,slice,sort,splice,unshift,every,forEach,
+    // some,indexOf,lastIndexOf,filter,flat,flatMap,reduce,reduceRight,map,entries,keys,find,findIndex,includes,copyWithin,constructor
+
+    var it = {};
+    document.write("Object.getOwnPropertyNames(it.__proto__) = " + Object.getOwnPropertyNames(it.__proto__) + "<br>");
+    // toString,toLocaleString,valueOf,hasOwnProperty,propertyIsEnumerable,isPrototypeOf,
+    // __defineGetter__,__defineSetter__,__lookupGetter__,__lookupSetter__,__proto__,
+    // constructor
+
+    /*
+    * 原型对象的问题:
+    *   1.没有初始化参数的规范
+    *   2.所有的实例对象共享属性，对于 包含引用类型的属性值 某个更改则所有实例对象全被更改
+    * */
+    var collegan = new PersonNeo();
+    collegan.friends.push("Enemy");
+    document.write("friend.friends = " + friend.friends + "<br>");//friend.friends = Jason,Marty,Enemy
+</script>
+</body>
+</html>

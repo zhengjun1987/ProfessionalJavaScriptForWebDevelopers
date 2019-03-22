@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter06 OOP</title>
+</head>
+<body>
+<script type="text/javascript" src="objects.js"></script>
+<script>
+
+    function Super() {
+        this.property = true;
+    }
+
+    Super.prototype.getSuperValue = function () {
+        return this.property;
+    };
+
+
+    function Sub() {
+        this.property = false;
+    }
+
+    /*
+    * 实现继承的本质是 重写原型对象，代之以一个父类型的实例
+    * */
+    Sub.prototype = new Super();
+
+    var sub = new Sub();
+
+    document.write("Sub.prototype = " + Sub.prototype + "<br>");
+    document.write("sub.getSuperValue() = " + sub.getSuperValue() + "<br>");//sub.getSuperValue() = false
+    Sub.prototype.getSubValue = function () {
+        return Sub.prototype.property;
+    };
+    document.write("sub.toString() = " + sub.toString() + "<br>");
+    document.write("sub.getSuperValue() = " + sub.getSuperValue() + "<br>");//sub.getSuperValue() = false
+    document.write("sub.getSubValue() = " + sub.getSubValue() + "<br>");//sub.getSubValue() = true
+
+    /*
+    * 原型和实例之间的关系：
+    *   1.instanceof 此操作符测试实例的原型链，只要原型链中出现过的构造函数都会返回true
+    *   2.isPrototypeOf 只要原型链中出现过的原型，都可以说是该原型链所派生的实例的原型
+    * */
+    document.write("(sub instanceof Sub) = " + (sub instanceof Sub) + "<br>");
+    document.write("(sub instanceof Super) = " + (sub instanceof Super) + "<br>");
+    document.write("(sub instanceof Object) = " + (sub instanceof Object) + "<br>");
+    // (sub instanceof Sub) = true
+    // (sub instanceof Super) = true
+    // (sub instanceof Object) = true
+
+    document.write("Object.prototype.isPrototypeOf(sub) = " + Object.prototype.isPrototypeOf(sub) + "<br>");
+    document.write("Super.prototype.isPrototypeOf(sub) = " + Super.prototype.isPrototypeOf(sub) + "<br>");
+    document.write("Sub.prototype.isPrototypeOf(sub) = " + Sub.prototype.isPrototypeOf(sub) + "<br>");
+    // Object.prototype.isPrototypeOf(sub) = true
+    // Super.prototype.isPrototypeOf(sub) = true
+    // Sub.prototype.isPrototypeOf(sub) = true
+
+    var super1 = new Super();
+    document.write("super1.getSuperValue() = " + super1.getSuperValue() + "<br>");
+
+    document.write("Sub.prototype.__proto__ = " + Sub.prototype.__proto__ + "<br>");//Sub.prototype.__proto__ = [getSuperValue] = function () { return this.property; }
+    /*
+    * 动用__proto__可以直接对父类方法进行改写
+    * 强烈不建议这么写
+    * */
+    Sub.prototype.__proto__.getSuperValue = function () {
+
+        return false;
+    };
+
+    document.write("Sub.prototype.__proto__ = " + Sub.prototype.__proto__ + "<br>");//Sub.prototype.__proto__ = [getSuperValue] = function () { return false; }
+    document.write("super1.getSuperValue() = " + super1.getSuperValue() + "<br>");
+    document.write("sub.getSuperValue() = " + sub.getSuperValue() + "<br>");
+
+
+    /*
+    * 原型链继承的问题
+    *   1.父类中若含有引用类型的实例属性，则子类所有实例对象会共享其原型中的父类实例属性
+    *   2.构造子类型实例时无法通过构造函数向父类传递参数
+    * */
+    function Super() {
+        this.property = false;
+        this.colors = ['red'];
+    }
+
+    function Sub() {
+
+    }
+
+    Sub.prototype = new Super();
+
+    var sub1 = new Sub();
+    document.write("sub1.property = " + sub1.property + "<br>");
+    document.write("sub1.colors = " + sub1.colors + "<br>");
+    // sub1.property = false
+    // sub1.colors = red
+
+    /*
+    * 这句话在sub1实例上创建了一个新的属性property覆盖了原型上的property，并非改写
+    * 若真的改写，应该是sub1.prototype.__proto__.property = true
+    * */
+    sub1.property = true;
+    /*
+    * 这句话改写了原型上的属性colors，并非创建新的属性
+    * */
+    sub1.colors.push("cyan");
+    document.write("sub1.property = " + sub1.property + "<br>");
+    document.write("sub1.colors = " + sub1.colors + "<br>");
+    // sub1.property = true
+    // sub1.colors = red,cyan
+
+    var sub2 = new Sub();
+    document.write("sub2.property = " + sub2.property + "<br>");
+    document.write("sub2.colors = " + sub2.colors + "<br>");
+    // sub2.property = false
+    // sub2.colors = red,cyan
+
+</script>
+</body>
+</html>

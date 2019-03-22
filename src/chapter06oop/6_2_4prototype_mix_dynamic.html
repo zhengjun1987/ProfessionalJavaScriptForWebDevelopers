@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter06</title>
+</head>
+<body>
+<script>
+
+    function Person_159(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.friends = ["Jason", "Marty"];
+        // 若将此段取消注释，下面的原型方法sayName将不存在
+        // this.sayName = function () {
+        //     return this.name;
+        // };
+    }
+
+    function sayName() {
+        alert(this.name);
+    }
+
+    /*
+    * 组合使用构造函数模式和原型模式（创建自定义对象的最常见方法）
+    *   构造函数模式用于定义 实例属性
+    *   原型模式用于定义 方法和共享的属性
+    *
+    * 使用最广泛、认可度最高、默认的定义引用类型的方式
+    * */
+    Person_159.prototype = {
+        constructor: Person_159,
+        /*
+        * 组合使用构造函数模式和原型模式 的 进一步改进
+        *   可以通过检查某个对象是否存在某个方法，决定是否需要初始化原型（原理其实跟前面 修改、添加原生类型对象的方法一样 ）
+        * */
+        sayName: (typeof this.sayName !== "function") ? sayName : this.sayName
+    };
+    var zhengjun = new Person_159("zhengjun", 19, "IT");
+    // zhengjun.sayName();
+    document.write("zhengjun.sayName() = " + zhengjun.sayName() + "<br>");
+    var account = new Person_159("Alex", 32, "Accountant");
+    var volley = account.friends.push("Volley");
+    document.write("account.friends = " + account.friends + "<br>");
+    document.write("zhengjun.friends = " + zhengjun.friends + "<br>");
+    // account.friends = Jason,Marty,Volley
+    // zhengjun.friends = Jason,Marty
+    document.write("(zhengjun.friends === account.friends) = " + (zhengjun.friends === account.friends) + "<br>");
+    document.write("(zhengjun.sayName === account.sayName) = " + (zhengjun.sayName === account.sayName) + "<br>");
+    document.write("zhengjun.hasOwnProperty(\"friends\") = " + zhengjun.hasOwnProperty("friends") + "<br>");//zhengjun.hasOwnProperty("friends") = true
+    // (zhengjun.friends === account.friends) = false
+    // (zhengjun.sayName === account.sayName) = true
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter06</title>
+</head>
+<body>
+<script>
+    "use strict";
+    var person1 = {};
+    person1.name = "Nicholas";
+    person1.age = 29;
+    person1.job = "Software Engineer";
+    person1.sayName = function () {
+        document.write("this.name = " + this.name + "<br>");
+    };
+
+    var person2 = {
+        name: "Nicholas",
+        age: 29,
+        job: "Software Engineer",
+        sayName: function () {
+            document.write("this.name = " + this.name + "<br>");
+        }
+    };
+
+    document.write("(person1 == person2) = " + (person1 == person2) + "<br>");//false
+    document.write("(person1 === person2) = " + (person1 === person2) + "<br>");//false
+
+
+
+
+
+
+
+    function sayAnObject(object) {
+        document.write("=========================" + "<br>");
+        for (var key in object) {
+            document.write("[" + key + "] = " + object[key] + ", ");
+        }
+        document.write("<br>=========================" + "<br>");
+    }
+
+    /*
+    * 数据属性：
+    * configurable：是否可以用delete将本属性删除（定义为false之后无法再设定，否则报错）
+    * enumerable：针对对象使用for操作能否访问到该属性
+    * writable：能否对其值进行修改
+    * value：数据值
+    *
+    * interface PropertyDescriptor {
+        configurable?: boolean;
+        enumerable?: boolean;
+        value?: any;
+        writable?: boolean;
+        get?(): any;
+        set?(v: any): void;
+      }
+    * */
+
+
+    document.write("Object.getOwnPropertyDescriptor(person2,\"age\").configurable = " + Object.getOwnPropertyDescriptor(person2, "age").configurable + "<br>");//true
+    //对原有属性进行覆盖
+    Object.defineProperty(person2, "age", {
+        writable: true,
+        value: 32,
+        enumerable: true,//设置成false之后无法在for中访问
+        configurable: false
+    });
+    document.write("Object.getOwnPropertyDescriptor(person2,\"age\").configurable = " + Object.getOwnPropertyDescriptor(person2, "age").configurable + "<br>");//false
+    sayAnObject(person2);
+
+    // [name] = Nicholas, [job] = Software Engineer, [sayName] = function () { document.write("this.name = " + this.name + " "); }, [age] = 32
+
+            /*
+            * person2.age = 33;
+            * writable: false  属性已设置成只读，导致TypeError: Attempted to assign to readonly property.
+            * */
+
+            // Object.defineProperty(person2,"age",{
+            //     configurable:true
+            // });
+            //
+            // [Error] TypeError: Attempting to change configurable attribute of unconfigurable property.
+            // defineProperty (6_1objects.html:80)
+            // 全局代码 (6_1objects.html:80)
+            // configurable: false重置为true的话会出错
+
+            // delete person2.age;
+            // [Error] TypeError: Unable to delete property.(不同浏览器报错内容不一样)
+            // 全局代码 (6_1objects.html:89)
+
+    document.write("Object.getOwnPropertyDescriptor(person2,\"age\").configurable = " + Object.getOwnPropertyDescriptor(person2, "age").configurable + "<br>");//false
+
+    Object.defineProperty(person2, "gender", {
+        writable: false,
+        value: "male",
+        enumerable: true,
+        configurable: false//
+    });
+
+    // delete person2.gender;//如果configurable: false，在严格模式下会TypeError: property "gender" is non-configurable and can't be deleted
+
+    Object.defineProperty(person2,"sayJob",{
+        writable: false,
+        value: function () {
+            alert(this.job);
+            document.write("this.job = " + this.job + "<br>");
+        },
+        enumerable: true,
+        configurable: false
+    });
+    sayAnObject(person2);
+    // [name] = Nicholas, [age] = 32, [job] = Software Engineer, [sayName] = function () { document.write("this.name = " + this.name + "
+    //     "); }, [gender] = male, [sayJob] = function () { alert(this.job); document.write("this.job = " + this.job + "
+    //     "); },
+    person2.sayJob();//this.job = Software Engineer
+    //由此可见可以通过数据属性的设置为对象添加方法
+
+
+
+    /*
+    * 访问器属性：
+    * enumerable:
+    * configurable：
+    * get:
+    * set:
+    * 访问器属性的背后肯定是一个或者几个其他的数据属性存在，思考一下！！！！！！
+    * 所以访问器属性没有writable特征
+    * 通过这个访问器属性，可以在完全隐藏数据属性的基础之上进一步控制数据属性的访问和设定！
+    * */
+    var book = {
+        _year: 2004,
+        edition: 1
+    };
+    //Object  --- Provides functionality common to all JavaScript objects.
+    var defineProperty = Object.defineProperty(book, "year", {
+        enumerable: true,//增加此属性之后在for循环中可以看到该属性了
+        get: function () {
+            return this._year;
+        },
+        set: function (v) {
+            if (v > 2004) {
+                this._year = v;
+                this.edition += v - 2004;
+            }
+        }
+    });
+
+    function sayAnObject(object) {
+        document.write("=========================" + "<br>");
+        for (var key in object) {
+            document.write("[" + key + "] = " + object[key] + ", ");
+        }
+        document.write("<br>=========================" + "<br>");
+    }
+
+    sayAnObject(defineProperty);
+    book.year = 2005;
+    document.write("book.edition = " + book.edition + "<br>");//book.edition = 2
+
+    var newbook = {};
+    Object.defineProperties(newbook, {
+        _year: {
+            enumerable: false,
+            writable: true,
+            configurable: true,
+            value: 2004
+        },
+        edition: {
+            enumerable: true,
+            writable: true,
+            configurable: true,
+            value: 1
+        },
+        year: {
+            enumerable: true,
+            configurable: true,
+            get: function () {
+                return this._year;
+            },
+            set: function (v) {
+                if (v > 2004) {
+                    this._year = v;
+                    this.edition += v - 2004;
+                }
+            }
+        }
+    });
+    var propertyDescriptor = Object.getOwnPropertyDescriptor(newbook, "_year");
+    sayAnObject(propertyDescriptor);
+    document.write("propertyDescriptor.configurable = " + propertyDescriptor.configurable + "<br>");
+    document.write("propertyDescriptor.value = " + propertyDescriptor.value + "<br>");
+    document.write("propertyDescriptor.enumerable = " + propertyDescriptor.enumerable + "<br>");
+    document.write("propertyDescriptor.writable = " + propertyDescriptor.writable + "<br>");
+    // propertyDescriptor.configurable = false
+    // propertyDescriptor.value = 2004
+    // propertyDescriptor.enumerable = false
+    // propertyDescriptor.writable = false
+    document.write("(typeof propertyDescriptor.get) = " + (typeof propertyDescriptor.get) + "<br>");//undefined
+
+    var descriptor = Object.getOwnPropertyDescriptor(newbook, "year");
+    sayAnObject(descriptor);
+
+    sayAnObject(newbook);//[edition] = 1, [year] = 2004
+    newbook.year = 2019;
+    document.write("newbook.edition = " + newbook.edition + "<br>");//newbook.edition = 16
+    sayAnObject(newbook);//[edition] = 16, [year] = 2019
+</script>
+</body>
+</html>

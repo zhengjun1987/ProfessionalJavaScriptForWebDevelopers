@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter06 OOP</title>
+</head>
+<body>
+<script>
+    /*
+    * 只有方法，没有属性的定义
+    * 使用JavaScript内部方法构造机制存储数据并限制访问方式
+    * 适用于安全环境。其他程序无法、修改访问传入构造函数的原始数据
+    * */
+    function Person(name, age, job) {
+        var object = new Object();
+        object.sayName = function () {
+            /*
+            * 程序无法通过调用这些方法以外的任何方式获取到数据值
+            * */
+            alert(name);//不用this储存变量
+        };
+        return object;
+    }
+    var person = Person("zhengjun",32,"engineer");//调用方法时不要用new
+    person.sayName();//zhengjun
+</script>
+</body>
+</html>

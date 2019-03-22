@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Factory</title>
+</head>
+<body>
+<script>
+    function sayAnObject(object) {
+        document.write("=========================" + "<br>");
+        for (var key in object) {
+            document.write("[" + key + "] = " + object[key] + ", ");
+        }
+        document.write("<br>=========================" + "<br>");
+    }
+
+    //    工厂模式:如何减少批量创建对象的字面量重复代码
+    function createPerson(name, age, job) {
+        var object = new Object();
+        object.name = name;
+        object.age = age;
+        object.job = job;
+        return object;
+    }
+
+    var person1 = createPerson("Nicholas", 29, "Software Engineer");
+    var person2 = createPerson("Greg", 27, "Doctor");
+
+    //    构造函数模式：如何识别对象的类型
+    //    构造模式的问题：每个方法都要在每个实例上重新创建一遍
+    function Person(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+
+        /*每个方法都要在每个实例上重新创建一遍*/
+        this.sayName = function () {
+            alert(this.name);
+        };
+
+        this.sayAge = sayAge;
+    }
+
+    /*
+    * 这种写法的尴尬之处：
+    *   1.表面上是全局函数，实际使用时仅作用于特定类的实例，名不副实
+    *   2.若对象需要定义很多方法，则需要些大量的全局函数，毫无封装性可言
+    * */
+    function sayAge() {
+        alert(this.age);
+    }
+
+    function sayName() {
+        alert(this.name);
+    }
+
+    var nicholas = new Person("Nicholas", 29, "Software Engineer");//不使用new 引用构造方法（没有return语句的方法）的话会产生返回值为undefined的错误
+    var greg = new Person("Greg", 27, "Doctor");
+
+    document.write("(nicholas.sayName === greg.sayName) = " + (nicholas.sayName === greg.sayName) + "<br>");//(nicholas.sayName === greg.sayName) = false
+    /*
+    * 书本原文：constructor属性对象最初是用来标识对象类型的，但是，检测对象类型还是instanceof操作符更可靠一些
+    * 三个跟对象类型有关的东西：constructor、instanceof、typeof...
+    * */
+    document.write("person1.constructor = " + person1.constructor + "<br>");//function Object() { [native code] }
+    document.write("nicholas.constructor = " + nicholas.constructor + "<br>");//function Person(name, age, job) { this.name = name; this.age = age; this.job = job; this.sayName = function () { alert(this.name); } }
+    document.write("(person1.constructor === Object) = " + (person1.constructor === Object) + "<br>");//true
+    document.write("(nicholas.constructor === Person) = " + (nicholas.constructor === Person) + "<br>");//true
+    document.write("(person1 instanceof Object) = " + (person1 instanceof Object) + "<br>");//true
+    document.write("(person1 instanceof Person) = " + (person1 instanceof Person) + "<br>");//false
+    document.write("(nicholas instanceof Object) = " + (nicholas instanceof Object) + "<br>");//true
+    document.write("(nicholas instanceof Person) = " + (nicholas instanceof Person) + "<br>");//true
+    // nicholas.sayName();//Nicholas
+
+    document.write("(typeof nicholas.constructor) = " + (typeof nicholas.constructor) + "<br>");//(typeof nicholas.constructor) = function
+    document.write("(typeof nicholas.prototype) = " + (typeof nicholas.prototype) + "<br>");//(typeof nicholas.prototype) = undefined
+    document.write("(typeof Person.prototype) = " + (typeof Person.prototype) + "<br>");//(typeof Person.prototype) = object
+    document.write("(typeof Object) = " + (typeof Object) + "<br>");//(typeof Object) = function
+    document.write("(typeof Person) = " + (typeof Person) + "<br>");//(typeof Person) = function
+
+    //构造器的另外一种使用方法
+    var object = new Object();
+    Person.call(object,"Malt",33,"Whisky");
+    document.write("(object.constructor === Person) = " + (object.constructor === Person) + "<br>");//false
+    document.write("(object instanceof Person) = " + (object instanceof Person) + "<br>");//false
+    document.write("object.name = " + object.name + "<br>");//object.name = Malt
+    object.sayName();
+
+
+    var nature = 42;
+    document.write("nature.constructor = " + nature.constructor + "<br>");//nature.constructor = function Number() { [native code] }
+    document.write("(nature.constructor === Number) = " + (nature.constructor === Number) + "<br>");
+    document.write("(nature.__proto__) = " + (nature.__proto__) + "<br>");
+    document.write("(nature instanceof Number) = " + (nature instanceof Number) + "<br>");
+    document.write("Number.prototype.isPrototypeOf(nature) = " + Number.prototype.isPrototypeOf(nature) + "<br>");
+
+</script>
+</body>
+</html>

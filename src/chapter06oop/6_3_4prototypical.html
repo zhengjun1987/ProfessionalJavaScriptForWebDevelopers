@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript" src="objects.js"></script>
+<script>
+    function object(o) {
+        function F() {
+
+        }
+        F.prototype = o;
+        return new F();
+    }
+
+    var person = {
+        name:"Bob",
+        friends:['Shelby',"Van"]
+    };
+
+    var another = object(person);
+    another.name = "Greg";
+    var third = object(person);
+    third.name = "Alex";
+
+    document.write("another = " + another + "<br>");//another = [name] = Greg, [friends] = Shelby,Van
+    person.friends.pop();
+
+    document.write("another = " + another + "<br>");//another = [name] = Greg, [friends] = Shelby
+    document.write("third = " + third + "<br>");//third = [name] = Alex, [friends] = Shelby
+
+    var person1 = Object.create(person);
+    person1.name = "Linda";
+    person1.friends.push("Alex");
+    document.write("person1 = " + person1 + "<br>");//person1 = [name] = Linda, [friends] = Shelby,Alex
+
+    var person2 = Object.create(person);
+    person2.name = "Baron";
+    person2.friends.push("Simba");
+    document.write("person2 = " + person2 + "<br>");//person2 = [name] = Baron, [friends] = Shelby,Alex,Simba
+
+</script>
+</body>
+</html>
