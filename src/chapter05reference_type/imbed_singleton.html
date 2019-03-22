@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter05 单体内置对象</title>
+</head>
+<body>
+<script>
+    <!--Global对象-->
+    var url = "http://www.wrox.com/illegal value.html#start";
+    document.write("encodeURI(url) = " + encodeURI(url) + "<br>");
+    //encodeURI(url) = http://www.wrox.com/illegal%20value.html#start
+    var uriComponent = encodeURIComponent(url);
+    document.write("encodeURIComponent(url) = " + uriComponent + "<br>");
+    //encodeURIComponent(url) = http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.html%23start
+
+    document.write("decodeURI(uriComponent) = " + decodeURI(uriComponent) + "<br>");
+    document.write("decodeURIComponent(uriComponent) = " + decodeURIComponent(uriComponent) + "<br>");
+    // decodeURI(uriComponent) = http%3A%2F%2Fwww.wrox.com%2Fillegal value.html%23start
+    // decodeURIComponent(uriComponent) = http://www.wrox.com/illegal value.html#start
+
+    var msg = "'hi'";
+    // eval("alert(" + msg + ")");
+    var helloWorld = "hello,world!";
+    // eval("alert(helloWorld);");
+    eval("function sayHi(){ alert('Hi'); }")
+    // sayHi();
+
+    //    Math对象
+    document.write("Math.E = " + Math.E + "<br>");
+    document.write("Math.LN2 = " + Math.LN2 + "<br>");
+    document.write("Math.LN10 = " + Math.LN10 + "<br>");
+    document.write("Math.LOG2E = " + Math.LOG2E + "<br>");
+    document.write("Math.LOG10E = " + Math.LOG10E + "<br>");
+    document.write("Math.PI = " + Math.PI + "<br>");
+    document.write("Math.SQRT1_2 = " + Math.SQRT1_2 + "<br>");
+    document.write("Math.SQRT2 = " + Math.SQRT2 + "<br>");
+    // Math.E = 2.718281828459045
+    // Math.LN2 = 0.6931471805599453
+    // Math.LN10 = 2.302585092994046
+    // Math.LOG2E = 1.4426950408889634
+    // Math.LOG10E = 0.4342944819032518
+    // Math.PI = 3.141592653589793
+    // Math.SQRT1_2 = 0.7071067811865476
+    // Math.SQRT2 = 1.4142135623730951
+
+    document.write("Math.max(3,54,32,26) = " + Math.max(3, 54, 32, 26) + "<br>");//54
+    document.write("Math.min(3,54,32,26) = " + Math.min(3, 54, 32, 26) + "<br>");//3
+    var numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+    document.write("Math.max(numbers) = " + Math.max(numbers) + "<br>");//NaN
+    document.write("Math.max.apply(Math,numbers) = " + Math.max.apply(Math, numbers) + "<br>");//8
+    document.write("Math.min.apply(Math,numbers) = " + Math.min.apply(Math, numbers) + "<br>");//1
+
+    document.write("Math.ceil(25.9) = " + Math.ceil(25.9) + "<br>");//26
+    document.write("Math.ceil(25.5) = " + Math.ceil(25.5) + "<br>");//26
+    document.write("Math.ceil(25.1) = " + Math.ceil(25.1) + "<br>");//26
+
+    document.write("Math.floor(25.9) = " + Math.floor(25.9) + "<br>");//25
+    document.write("Math.floor(25.5) = " + Math.floor(25.5) + "<br>");//25
+    document.write("Math.floor(25.1) = " + Math.floor(25.1) + "<br>");//25
+
+    document.write("Math.round(25.9) = " + Math.round(25.9) + "<br>");//26
+    document.write("Math.round(25.5) = " + Math.round(25.5) + "<br>");//26
+    document.write("Math.round(25.1) = " + Math.round(25.1) + "<br>");//25
+
+    document.write("Math.random() = " + Math.random() + "<br>");//0.22490009177023917
+    document.write("Math.floor(Math.random() * 10 + 1) = " + Math.floor(Math.random() * 10 + 1) + "<br>");//8
+
+    function randomSelect(min, max) {
+        var range = max - min + 1;
+        return Math.floor(Math.random() * range + min);
+    }
+
+    var strings = ['red', 'green', 'blue', 'yellow', 'black', 'purple', 'brown'];
+    document.write("strings[randomSelect(0,strings.length-1)] = " + strings[randomSelect(0, strings.length - 1)] + "<br>");
+</script>
+</body>
+</html>

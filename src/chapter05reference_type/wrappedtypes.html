@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter05 WrappedTypes</title>
+</head>
+<body>
+<script>
+    var text = "some text";
+    var substr = text.substr(2);
+    document.write("substr = " + substr + "<br>");//substr = me text
+
+    var object = new Object("red");
+    document.write("(object instanceof String) = " + (object instanceof String) + "<br>");//(object instanceof String) = true
+
+    var num = Number("24");//转型函数
+    document.write("(typeof num) = " + (typeof num) + "<br>");//(typeof num) = number
+    var obj = new Number("24");//构造函数
+    document.write("(typeof obj) = " + (typeof obj) + "<br>");//(typeof obj) = object
+
+    var trueObj = new Boolean(true);
+    var falseObj = new Boolean(false);
+    document.write("(falseObj && true) = " + (falseObj && true) + "<br>");//(falseObj && true) = true
+    var falseValue = false;
+    document.write("(falseValue && true) = " + (falseValue && true) + "<br>");//(falseValue && true) = false
+    document.write("(typeof falseObj) = " + (typeof falseObj) + "<br>");
+    document.write("(typeof falseValue) = " + (typeof falseValue) + "<br>");
+    document.write("(falseObj instanceof Boolean) = " + (falseObj instanceof Boolean) + "<br>");
+    document.write("(falseValue instanceof Boolean) = " + (falseValue instanceof Boolean) + "<br>");
+    // (typeof falseObj) = object
+    // (typeof falseValue) = boolean
+    // (falseObj instanceof Boolean) = true
+    // (falseValue instanceof Boolean) = false
+
+
+    var numberObj = new Number(10);
+    var num = 10;
+    document.write("num.toString() = " + num.toString() + "<br>");
+    document.write("num.toString(2) = " + num.toString(2) + "<br>");
+    document.write("num.toString(8) = " + num.toString(8) + "<br>");
+    document.write("num.toString(10) = " + num.toString(10) + "<br>");
+    document.write("num.toString(16) = " + num.toString(16) + "<br>");
+    // num.toString() = 10
+    // num.toString(2) = 1010
+    // num.toString(8) = 12
+    // num.toString(10) = 10
+    // num.toString(16) = a
+
+    document.write("num.toFixed(2) = " + num.toFixed(2) + "<br>");
+    var pi = 3.1415926;
+    document.write("pi.toFixed(3) = " + pi.toFixed(3) + "<br>");
+    // num.toFixed(2) = 10.00
+    // pi.toFixed(3) = 3.142
+
+    document.write("(typeof numberObj) = " + (typeof numberObj) + "<br>");
+    document.write("(typeof num) = " + (typeof num) + "<br>");
+    document.write("(numberObj instanceof Number) = " + (numberObj instanceof Number) + "<br>");
+    document.write("(num instanceof Number) = " + (num instanceof Number) + "<br>");
+    // (typeof numberObj) = object
+    // (typeof num) = number
+    // (numberObj instanceof Number) = true
+    // (num instanceof Number) = false
+
+
+    var stringObj = new String("hello,world");
+    var stringValue = "hello,world";
+    document.write("stringObj.length = " + stringObj.length + "<br>");
+    document.write("stringValue.length = " + stringValue.length + "<br>");
+    // stringObj.length = 11
+    // stringValue.length = 11
+    document.write("stringValue.charAt(1) = " + stringValue.charAt(1) + "<br>");//e
+    document.write("stringValue.charCodeAt(1) = " + stringValue.charCodeAt(1) + "<br>");//101
+    document.write("stringValue[1] = " + stringValue[1] + "<br>");//e
+
+    document.write("\"hello\".concat(\", world\",\"!\") = " + "hello".concat(", world", "!") + "<br>");
+    // "hello".concat(", world","!") = hello, world!
+    document.write("stringValue.slice(3) = " + stringValue.slice(3) + "<br>");
+    document.write("stringValue.substr(3) = " + stringValue.substr(3) + "<br>");
+    document.write("stringValue.substring(3) = " + stringValue.substring(3) + "<br>");
+    //substring、slice方法的第二个参数是结束下标，substr方法的第二个参数是截取长度
+
+    document.write("stringValue.indexOf(\"o\") = " + stringValue.indexOf("o") + "<br>");
+    document.write("stringValue.lastIndexOf(\"o\") = " + stringValue.lastIndexOf("o") + "<br>");
+    document.write("stringValue.indexOf(\"o\",6) = " + stringValue.indexOf("o", 6) + "<br>");
+    document.write("stringValue.lastIndexOf(\"o\",6) = " + stringValue.lastIndexOf("o", 6) + "<br>");
+    // stringValue.indexOf("o") = 4
+    // stringValue.lastIndexOf("o") = 7
+    // stringValue.indexOf("o",6) = 7
+    // stringValue.lastIndexOf("o",6) = 4
+
+    document.write("\" hello, world!  \".trim() = " + " hello, world!  ".trim() + "<br>");
+    //" hello, world! ".trim() = hello, world!
+    document.write("stringValue.toUpperCase() = " + stringValue.toUpperCase() + "<br>");
+    document.write("stringValue.toUpperCase().toLowerCase() = " + stringValue.toUpperCase().toLowerCase() + "<br>");
+    //stringValue.toUpperCase() = HELLO,WORLD
+    //stringValue.toUpperCase().toLowerCase() = hello,world
+
+    var text = "cat,bat,sat,fat";
+    var match = text.match(/.at/g);
+    for (var i = 0; i < match.length; i++) {
+        document.write("match[" + i + "] = " + match[i] + "<br>");
+    }
+    // match[0] = cat
+    // match[1] = bat
+    // match[2] = sat
+    // match[3] = fat
+    document.write("text.replace(\"at\",\"ond\") = " + text.replace("at", "ond") + "<br>");//传入字符串只能替换一个
+    // text.replace("at","ond") = cond,bat,sat,fat
+    document.write("text.replace(/at/g,\"ond\") = " + text.replace(/at/g, "ond") + "<br>");//传入正则表达式可以根据规则替换多个
+    // text.replace(/at/g,"ond") = cond,bond,sond,fond
+    document.write("text.replace(/(.at)/g,\"word ($1)\") = " + text.replace(/(.at)/g, "word ($&)") + "<br>");
+    //text.replace(/(.at)/g,"word ($1)") = word (cat),word (bat),word (sat),word (fat)
+    function htmlEscape(text) {
+        return text.replace(/[<>"&]/g,function (substring,args) {
+            document.write("substring = " + substring + "<br>");
+            switch (substring) {
+                case "<":
+                    return "&lt;";
+                case ">":
+                    return "&gt;";
+                case "&":
+                    return "&amp;";
+                case "\"":
+                    return "&quot;";
+            }
+        });
+    }
+
+    var htmlEscape1 = htmlEscape("<p class=\"greeting\">Hello world!</p>");
+    // alert(htmlEscape1);//&lt;p class=&quot;greeting&quot;&gt;Hello world!&lt;/p&gt;
+    // document.write(htmlEscape1 + " <br> ");
+
+    var colorText = "red,blue,green,yellow";
+    var strings = colorText.split(",");
+    document.write("colorText.split(\",\") = " + strings + "<br>");
+    //第二个参数设定新数组元素个数
+    var strings1 = colorText.split(",",2);
+    // colorText.split(",") = red,blue,green,yellow
+    document.write("colorText.split(\",\",2) = " + strings1 + "<br>");
+    // colorText.split(",",2) = red,blue
+    document.write("colorText.split(/[^\\,]+/) = " + colorText.split(/[^\,]+/) + "<br>");//colorText.split(/[^\,]+/) = ,,,,,,,
+
+    var yellow = "yellow";
+    document.write("yellow.localeCompare(\"brick\") = " + yellow.localeCompare("brick") + "<br>");
+    document.write("yellow.localeCompare(\"yellow\") = " + yellow.localeCompare("yellow") + "<br>");
+    document.write("yellow.localeCompare(\"zoo\") = " + yellow.localeCompare("zoo") + "<br>");
+    // yellow.localeCompare("brick") = 1
+    // yellow.localeCompare("yellow") = 0
+    // yellow.localeCompare("zoo") = -1
+    document.write("String.fromCharCode(104,101,108,108,111) = " + String.fromCharCode(104, 101, 108, 108, 111) + "<br>");
+    // String.fromCharCode(104,101,108,108,111) = hello
+</script>
+</body>
+</html>

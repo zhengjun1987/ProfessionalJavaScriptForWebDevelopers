@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter05</title>
+</head>
+<body>
+<script>
+    var person = {name: "Nicholas", age: 34, 5: true};//key被默认为字符串
+    document.write("person[\"5\"] = " + person["5"] + "<br>");//person["5"] = true
+    document.write("person.name = " + person.name + "<br>");//person.name = Nicholas
+
+    function displayInfo(args) {
+        var output = '';
+        if (typeof args.name == "string") output += "Name:" + args.name + "\n";
+        if (typeof args.age == "number") output += "Age:" + args.age + "\n";
+        alert(output);
+    }
+
+    // displayInfo(person);
+    // displayInfo({
+    //     name:"Greg",
+    //     age:17
+    // })
+
+    document.write("person[\"name\"] = " + person["name"] + "<br>");//person["name"] = Nicholas
+
+    var colors = new Array("red", "blue", "green");
+    var a3ElementsArray = new Array(3);
+    document.write("a3ElementsArray[0] = " + a3ElementsArray[0] + "<br>");//a3ElementsArray[0] = undefined
+    var aIntArray = new Array(1, 2, 3);
+    var anotherIntArray = [1, 2, 3];
+    var emptyArray = [];
+    document.write("emptyArray[1] = " + emptyArray[1] + "<br>");//emptyArray[1] = undefined
+    document.write("emptyArray.length = " + emptyArray.length + "<br>");//emptyArray.length = 0
+    document.write("anotherIntArray.length = " + anotherIntArray.length + "<br>");//anotherIntArray.length = 3
+
+    document.write("Array.isArray(emptyArray) = " + Array.isArray(emptyArray) + "<br>");//Array.isArray(emptyArray) = true
+    document.write("Array.isArray(document.getElementsByTagName(\"*\")) = " + Array.isArray(document.getElementsByTagName("*")) + "<br>");
+    //Array.isArray(document.getElementsByTagName("*")) = false
+
+    document.write("colors = " + colors + "<br>");//colors = red,blue,green
+    document.write("colors.toString() = " + colors.toString() + "<br>");//colors.toString() = red,blue,green
+    document.write("colors.valueOf() = " + colors.valueOf() + "<br>");//colors.valueOf() = red,blue,green
+
+    var person1 = {
+        toString: function () {
+            return "Nicholas"
+        },
+        toLocaleString: function () {
+            return "Nicholaos"
+        }
+    };
+    var person2 = {
+        toString: function () {
+            return "Greg"
+        },
+        toLocaleString: function () {
+            return "Grigorious"
+        }
+    };
+    var people = [person1, person2];
+    document.write("people = " + people + "<br>");
+    document.write("people.toString() = " + people.toString() + "<br>");
+    document.write("people.toLocaleString() = " + people.toLocaleString() + "<br>");
+    // people = Nicholas,Greg
+    // people.toString() = Nicholas,Greg
+    // people.toLocaleString() = Nicholaos,Grigorious
+
+    document.write("colors.join(\"*\") = " + colors.join(" * ") + "<br>");
+    document.write("colors.join(\"||\") = " + colors.join(" || ") + "<br>");
+    // colors.join("*") = red * blue * green
+    // colors.join("||") = red || blue || green
+
+    colors.push('cyan', 'black');
+    document.write("colors = " + colors + "<br>");//colors = red,blue,green,cyan,black
+    var pop = colors.pop();
+    document.write("pop = " + pop + "<br>");//pop = black
+    document.write("colors = " + colors + "<br>");//colors = red,blue,green,cyan
+
+    colors.push("grey");
+    document.write("colors = " + colors + "<br>");
+    var shift = colors.shift();
+    document.write("shift = " + shift + "<br>");
+    document.write("colors = " + colors + "<br>");
+    // colors = red,blue,green,cyan,grey
+    // shift = red
+    // colors = blue,green,cyan,grey
+
+    colors.unshift("yellow");
+    document.write("colors = " + colors + "<br>");//colors = yellow,blue,green,cyan,grey
+
+    var numbers = [1, 2, 3, 4, 5];
+    numbers.reverse();
+    document.write("numbers = " + numbers + "<br>");//numbers = 5,4,3,2,1
+    numbers.sort();
+    document.write("numbers = " + numbers + "<br>");//numbers = 1,2,3,4,5
+
+    var counts = [0, 1, 5, 10, 15];
+    counts.sort();//默认无参数时调用每个元素的toString方法进行比较 If omitted, the elements are sorted in ascending, ASCII character order.
+    document.write("counts = " + counts + "<br>");//counts = 0,1,10,15,5
+    counts.sort(function (a, b) {
+        return a - b;
+    });
+    document.write("counts = " + counts + "<br>");//counts = 0,1,5,10,15
+
+    var concat = counts.concat(4, [12, 33]);
+    document.write("concat = " + concat + "<br>");//concat = 0,1,5,10,15,4,12,33
+    document.write("counts = " + counts + "<br>");//counts = 0,1,5,10,15
+    document.write("concat.slice(3) = " + concat.slice(3) + "<br>");//concat.slice(3) = 10,15,4,12,33
+    document.write("concat.slice(3,4) = " + concat.slice(3, 4) + "<br>");//concat.slice(3,4) = 10
+    document.write("concat.slice(-1) = " + concat.slice(-1) + "<br>");//concat.slice(-1) = 33
+    document.write("concat.slice(-2,-1) = " + concat.slice(-2, -1) + "<br>");//concat.slice(-2,-1) = 12
+
+    //splice方法：删除指定的元素组
+    //第一个参数：起始下标；第二个参数：删除个数；剩余参数：添加内容
+    document.write("concat.splice(0,1) = " + concat.splice(0, 1) + "<br>");//concat.splice(0,1) = 0
+    document.write("concat = " + concat + "<br>");//concat = 1,5,10,15,4,12,33
+    document.write("concat.splice(1,1,99,81) = " + concat.splice(1, 1, 99, 81) + "<br>");//concat.splice(1,1,99,81) = 5
+    document.write("concat = " + concat + "<br>");//concat = 1,99,81,10,15,4,12,33
+
+    //位置方法
+    concat.push(15);
+    document.write("concat = " + concat + "<br>");//1,99,81,10,15,4,12,33,15
+    document.write("concat.indexOf(15) = " + concat.indexOf(15) + "<br>");//concat.indexOf(15) = 4
+    document.write("concat.lastIndexOf(15) = " + concat.lastIndexOf(15) + "<br>");//concat.lastIndexOf(15) = 8
+
+    var nums = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+    document.write("nums.indexOf(4,4) = " + nums.indexOf(4, 4) + "<br>");//nums.indexOf(4,4) = 5
+    document.write("nums.lastIndexOf(4,4) = " + nums.lastIndexOf(4, 4) + "<br>");//nums.lastIndexOf(4,4) = 3
+
+    var person = {name: "Nicholas"};
+    var people = [{name: "Nicholas"}];
+    var anotherPeople = [person];
+    /*
+    * indexOf的匹配标准：=== ，既要类型一致，又要等值
+    * */
+    document.write("people.indexOf(person) = " + people.indexOf(person) + "<br>");//people.indexOf(person) = -1
+    document.write("anotherPeople.indexOf(person) = " + anotherPeople.indexOf(person) + "<br>");//anotherPeople.indexOf(person) = 0
+    document.write("(typeof person) = " + (typeof person) + "<br>");
+    document.write("(typeof people[0]) = " + (typeof people[0]) + "<br>");
+
+    var every = nums.every(function (value, index, array) {
+        return value > 3;
+    });
+    document.write("every = " + every + "<br>");//every = false
+    var some = nums.some(function (value, index, array) {
+        return value > 3;
+    });
+    document.write("some = " + some + "<br>");//some = true
+
+    document.write("nums.filter(function (value) { return value > 2 }) = " + nums.filter(function (value) {
+        return value > 2
+    }) + "<br>");
+    //nums.filter(function (value) { return value > 2 }) = 3,4,5,4,3
+    document.write("nums.map(function (value) { return value*2 }) = " + nums.map(function (value) {
+        return value * 2
+    }) + "<br>");
+    //nums.map(function (value) { return value*2 }) = 2,4,6,8,10,8,6,4,2
+    nums.forEach(function (value) {
+        document.write("value = " + value + "<br>");
+    });
+    // value = 1
+    // value = 2
+    // value = 3
+    // value = 4
+    // value = 5
+    // value = 4
+    // value = 3
+    // value = 2
+    // value = 1
+
+    var values = [1,2,3,4,5];
+    var reduce = values.reduce(function (previousValue, currentValue, currentIndex, array) {
+        document.write("previousValue = " + previousValue + ";  currentValue = " + currentValue + ";  currentIndex = " + currentIndex + "<br>");
+        return previousValue + currentValue;
+    });
+    document.write("reduce = " + reduce + "<br>");
+    // previousValue = 1; currentValue = 2; currentIndex = 1
+    // previousValue = 3; currentValue = 3; currentIndex = 2
+    // previousValue = 6; currentValue = 4; currentIndex = 3
+    // previousValue = 10; currentValue = 5; currentIndex = 4
+    // reduce = 15
+    var reduceRight = values.reduceRight(function (previousValue, currentValue, currentIndex, array) {
+        document.write("previousValue = " + previousValue + ";  currentValue = " + currentValue + ";  currentIndex = " + currentIndex + "<br>");
+        return previousValue + currentValue;
+    });
+    document.write("reduceRight = " + reduceRight + "<br>");
+    // previousValue = 5; currentValue = 4; currentIndex = 3
+    // previousValue = 9; currentValue = 3; currentIndex = 2
+    // previousValue = 12; currentValue = 2; currentIndex = 1
+    // previousValue = 14; currentValue = 1; currentIndex = 0
+    // reduceRight = 15
+</script>
+</body>
+</html>

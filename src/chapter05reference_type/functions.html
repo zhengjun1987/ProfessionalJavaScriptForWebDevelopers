@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Chapter05 Functions</title>
+</head>
+<body>
+<script>
+    /*
+    * 先解析（函数），再执行
+    * */
+    document.write("sum(2,3) = " + sum(2, 3) + "<br>");//sum(2,3) = 5
+    function sum(a, b) {
+        return a + b;
+    }
+
+    /**
+     * 函数是对象，函数名是指针
+     * */
+    document.write("sum(2,2) = " + sum(2, 2) + "<br>");//sum(2,2) = 4
+    var another = sum;
+    document.write("another(1,1) = " + another(1, 1) + "<br>");//another(1,1) = 2
+    sum = null;
+    document.write("another(10,10) = " + another(10, 10) + "<br>");//another(10,10) = 20
+
+    function addSomeNumber(num) {
+        return num + 100;
+    }
+
+    function addSomeNumber(num) {
+        return num + 200;
+    }
+
+    /*
+    * 只有覆盖，没有重载
+    * */
+    document.write("addSomeNumber(1) = " + addSomeNumber(1) + "<br>");//addSomeNumber(1) = 201
+
+    function callSomeFunction(someFunction, args) {
+        return someFunction(args);
+    }
+
+    document.write("callSomeFunction(addSomeNumber,12) = " + callSomeFunction(addSomeNumber, 12) + "<br>");
+
+    function getGreeting(name) {
+        return "Hello," + name;
+    }
+
+    document.write("callSomeFunction(getGreeting,\"Nicholas\") = " + callSomeFunction(getGreeting, "Nicholas") + "<br>");
+    // callSomeFunction(addSomeNumber,12) = 212
+    // callSomeFunction(getGreeting,"Nicholas") = Hello,Nicholas
+
+    function createCompareFunction(propertyName) {
+        return function (a, b) {
+            var av = a[propertyName];
+            var bv = b[propertyName];
+            return av > bv ? 1 :
+                av === bv ? 0 : -1;
+        }
+    }
+
+    var data = [{name: "Zachary", age: 28}, {name: "Nicholas", age: 29}];
+    data.sort(createCompareFunction("name"));
+    document.write("data = " + data[0].name + "<br>");//Nicholas
+    data.sort(createCompareFunction("age"));
+    document.write("data = " + data[0].name + "<br>");//Zachary
+
+    function factorial(num) {
+        if (num <= 1) return 1;
+        // return num * factorial(num - 1);
+        //arguments.callee这种写法指向的是这个函数本身。防止本函数的名称指针被设定指向其他函数导致本函数功能不能实现
+        return num * arguments.callee(num - 1);
+    }
+    document.write("factorial(6) = " + factorial(6) + "<br>");//factorial(6) = 720
+
+    window.color = "white";
+    function sayColor() {
+        /* 本函数处在不同的context时，this的指向含义不同，代表的作用域不同*/
+        document.write("this.color = " + this.color + "<br>");
+        return this.color;
+    }
+    sayColor();//this.color = white
+    var o = {color:"cyan"};
+    o.sayColor = sayColor;
+    o.sayColor();//this.color = cyan
+
+    function outer() {
+        inner();
+    }
+    function inner() {
+        document.write("inner.caller = " + inner.caller + "<br>");//inner.caller = function outer() { inner(); }
+        document.write("arguments.callee.caller = " + arguments.callee.caller + "<br>");//arguments.callee.caller = function outer() { inner(); }
+    }
+    outer();
+
+    document.write("inner.length = " + inner.length + "<br>");
+    document.write("factorial.length = " + factorial.length + "<br>");
+    document.write("sum.length = " + another.length + "<br>");
+    // inner.length = 0
+    // factorial.length = 1
+    // sum.length = 2
+
+    function callSum1(a,b) {
+        return another.apply(this,arguments);
+    }
+    function callSum2(a,b) {
+        return another.apply(this,[a,b]);
+    }
+    document.write("callSum1(10,10) = " + callSum1(10, 10) + "<br>");
+    document.write("callSum2(10,10) = " + callSum2(10, 10) + "<br>");
+    // callSum1(10,10) = 20
+    // callSum2(10,10) = 20
+
+    function callSum(a,b) {
+        return another.call(this,a,b);
+    }
+
+    document.write("callSum(10,10) = " + callSum(10, 10) + "<br>");
+    //callSum(10,10) = 20
+
+    document.write("sayColor.call(this) = " + sayColor.call(this) + "<br>");
+    document.write("sayColor.call(window) = " + sayColor.call(window) + "<br>");
+    document.write("sayColor.call(o) = " + sayColor.call(o) + "<br>");
+    // this.color = white
+    // this.color = white
+    // this.color = cyan
+
+    //方法绑定对象
+    var bindWindow = sayColor.bind(window);
+    document.write("bindWindow() = " + bindWindow() + "<br>");
+    var bindO = sayColor.bind(o);
+    document.write("bindO() = " + bindO() + "<br>");
+    // bindWindow() = white
+    // bindO() = cyan
+</script>
+</body>
+</html>
