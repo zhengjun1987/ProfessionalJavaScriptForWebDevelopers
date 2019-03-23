@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>顶层top-level函数、有名函数加载规则 递归</title>
+</head>
+<body>
+<script type="text/javascript" src="../chapter06oop/objects.js"></script>
+<script>
+    // "use strict";
+
+    /*
+    * JavaScript在执行脚本前先加载顶层有名函数 非匿名函数、赋值函数
+    * 有名字重复时，后者覆盖前者
+    * */
+    function functionName() {
+
+    }
+    // sayHi();
+
+    // z();
+
+    for (var i = 0; i < 2; i++) {
+        function z() {
+            document.write("\"z = \" = " + "z = " + "<br>");
+        }
+    }
+
+    document.write("functionName = " + functionName + "<br>");//functionName = function functionName() { }
+    document.write("functionName.name = " + functionName.name + "<br>");//functionName.name = functionName
+
+    if (1) {
+        //Chrome、Firefox会视判断条件选择不同的函数
+        function sayHi() {
+            document.write("\"Hi!\" = " + "Hi!" + "<br>");
+        }
+    } else {
+        //无论判断条件是false还是true，Safari浏览器采用的是预加载重名覆盖机制（不考虑判断条件）
+        function sayHi() {
+            document.write("\"Yo!\" = " + "Yo!" + "<br>");
+        }
+    }
+    sayHi();
+
+
+    var sayHello;
+    /*
+    * 这种写法Safari浏览器才会也跟着做判断
+    * */
+    if (1) {
+        sayHello = function () {
+            document.write("\"Hello!\" = " + "Hello!" + "<br>");
+        }
+    } else {
+        sayHello = function () {
+            document.write("\"World!\" = " + "World!" + "<br>");
+        }
+    }
+    sayHello();
+
+    function factorial(num) {
+        if (num <= 1) return 1;
+        return num * factorial(num - 1);
+    }
+
+
+    /*
+    * 真正的递归：让函数的表达式独立于函数名称
+    * */
+    var factorial = function (num) {
+        if (num <= 1) return 1;
+        return num * arguments.callee(num - 1);//让函数的表达式独立于函数名称(严格模式会被禁用)
+    };
+    document.write("factorial(5) = " + factorial(5) + "<br>");
+
+    /*
+    * 一种奇葩但有用的函数调用方式:匿名函数
+    * */
+    (function (num) {
+        document.write("num = " + num + "<br>");
+    })(3);//num = 3
+
+    var name = (function () {
+        document.write("true = " + true + "<br>");
+    }).name;
+    document.write("name = " + name + "<br>");//""
+
+    var factorial = (function f(num) {
+        if (num <= 1) return 1;
+        return num * f(num - 1);
+    });
+</script>
+</body>
+</html>

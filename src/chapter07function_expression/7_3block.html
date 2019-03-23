@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>模仿块级作用域</title>
+</head>
+<body>
+<script type="text/javascript" src="../chapter06oop/objects.js"></script>
+<script>
+    function outputNumbers() {
+        (function () {
+            for (var i = 0; i <= 10; i++) {
+                // alert(i);
+                document.write("i = " + i + "<br>");
+            }
+        })();//语言设计缺陷导致开发者使用这种奇葩的写法来规避问题，避免变量命名污染
+
+        var i;//不做隔离的话，重新声明一个变量，其值仍然是原值，不会改变
+        // alert(i);
+        document.write("i = " + i + "<br>");// 11 或者 undefined
+    }
+
+    outputNumbers();
+
+    (function () {
+        var date = new Date();
+        if (date.month === 0 && date.getDate() === 1) {
+            alert("Happy New Year!")
+        } else {
+            alert("Now");
+        }
+    })();
+</script>
+</body>
+</html>

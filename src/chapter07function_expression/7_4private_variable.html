@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript" src="../chapter06oop/objects.js"></script>
+<script>
+    /*
+    * JavaScript没有私有成员的概念
+    * 但是有私有变量——在函数内部定义的变量，都可以被视为私有变量（私有方法）
+    * */
+    function MyObject() {
+        var privateVariable = 10;
+
+        function privateFunction() {
+            return false;
+        }
+
+        this.publicMethod = function () {
+            privateVariable++;
+            document.write("privateVariable = " + privateVariable + "<br>");
+            return privateFunction();
+        }
+    }
+
+    var myObject = new MyObject();
+    document.write("myObject.publicMethod() = " + myObject.publicMethod() + "<br>");
+    // privateVariable = 11
+    // myObject.publicMethod() = false
+
+    var myObject1 = new MyObject();
+    myObject1.publicMethod();
+    myObject1.publicMethod();
+    myObject1.publicMethod();
+    myObject1.publicMethod();
+    myObject.publicMethod();
+    // privateVariable = 11
+    // privateVariable = 12
+    // privateVariable = 13
+    // privateVariable = 14
+    // privateVariable = 12
+
+
+    // function Person(name) {
+    //     this.getName = function () {
+    //         return name;
+    //     };
+    //     this.setName = function (v) {
+    //         name = v;
+    //     }
+    // }
+    //
+    // var person = new Person("Nicholas");
+    // document.write("person.getName() = " + person.getName() + "<br>");//Nicholas
+    // person.setName("Greg");
+    // document.write("person.name = " + person.name + "<br>");//undefined
+    // document.write("person.getName() = " + person.getName() + "<br>");//Greg
+
+    (function () {
+        /*
+        * 这个方法只会被执行一次，所以产生的变量在执行背景中只有一个
+        * 加上下面原型对象的访问方式，形成了静态私有变量
+        * */
+        var name = '';
+        Person = function(value) {
+            name = value;
+        };
+        Person.prototype.getName = function () { return name; };
+        Person.prototype.setName = function (v) {
+            name = v;
+        }
+    })();
+
+    var person = new Person("Nicholas");
+    document.write("person.getName() = " + person.getName() + "<br>");
+    person.setName("Greg");
+    document.write("person.getName() = " + person.getName() + "<br>");
+
+    var mickael = new Person("Michael");
+    document.write("person.getName() = " + person.getName() + "<br>");
+    document.write("mickael.getName() = " + mickael.getName() + "<br>");
+
+
+    /*
+    * 模块模式：为单例创建私有变量和特权方法
+    * */
+    var singleton = function () {
+        var privateValue = 10;
+        function privateFunction() {
+            return false;
+        }
+        return {
+            publicProperty:true,
+            publicMethod:function () {
+                privateValue++;
+                return privateFunction();
+            }
+        };
+    }
+</script>
+</body>
+</html>
