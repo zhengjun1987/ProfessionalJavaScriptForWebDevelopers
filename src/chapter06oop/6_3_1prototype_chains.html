@@ -18,7 +18,7 @@
 
 
     function Sub() {
-        this.property = false;
+        this.subproperty = false;
     }
 
     /*
@@ -26,17 +26,18 @@
     * */
     Sub.prototype = new Super();
 
+    Sub.prototype.getSubValue = function () {
+        return this.subproperty;
+    };
+
     var sub = new Sub();
 
-    document.write("Sub.prototype = " + Sub.prototype + "<br>");
-    document.write("sub.getSuperValue() = " + sub.getSuperValue() + "<br>");//sub.getSuperValue() = false
-    Sub.prototype.getSubValue = function () {
-        return Sub.prototype.property;
-    };
-    document.write("sub.toString() = " + sub.toString() + "<br>");
-    document.write("sub.getSuperValue() = " + sub.getSuperValue() + "<br>");//sub.getSuperValue() = false
-    document.write("sub.getSubValue() = " + sub.getSubValue() + "<br>");//sub.getSubValue() = true
-
+    document.write("Sub.prototype = " + Sub.prototype + "<br>");//Sub.prototype = Super{[property] = true, function getSubValue, function getSuperValue}
+    document.write("sub.getSuperValue() = " + sub.getSuperValue() + "<br>");//sub.getSuperValue() = true
+    document.write("sub.toString() = " + sub.toString() + "<br>");//sub.toString() = Super{[subproperty] = false, [property] = true, function getSubValue, function getSuperValue}
+    document.write("sub.getSuperValue() = " + sub.getSuperValue() + "<br>");//sub.getSuperValue() = true
+    document.write("sub.getSubValue() = " + sub.getSubValue() + "<br>");//sub.getSubValue() = false
+    document.write("sub.constructor = " + sub.constructor + "<br>");//sub.constructor = function Super() { this.property = true; }
     /*
     * 原型和实例之间的关系：
     *   1.instanceof 此操作符测试实例的原型链，只要原型链中出现过的构造函数都会返回true
@@ -64,8 +65,7 @@
     * 动用__proto__可以直接对父类方法进行改写
     * 强烈不建议这么写
     * */
-    Sub.prototype.__proto__.getSuperValue = function () {
-
+    Sub.prototype.getSuperValue = function () {
         return false;
     };
 
@@ -79,18 +79,18 @@
     *   1.父类中若含有引用类型的实例属性，则子类所有实例对象会共享其原型中的父类实例属性
     *   2.构造子类型实例时无法通过构造函数向父类传递参数
     * */
-    function Super() {
+    function Super_167() {
         this.property = false;
         this.colors = ['red'];
     }
 
-    function Sub() {
+    function Sub_167() {
 
     }
 
-    Sub.prototype = new Super();
+    Sub_167.prototype = new Super_167();
 
-    var sub1 = new Sub();
+    var sub1 = new Sub_167();
     document.write("sub1.property = " + sub1.property + "<br>");
     document.write("sub1.colors = " + sub1.colors + "<br>");
     // sub1.property = false
@@ -105,12 +105,14 @@
     * 这句话改写了原型上的属性colors，并非创建新的属性
     * */
     sub1.colors.push("cyan");
+    document.write("sub1 = " + sub1 + "<br>");//sub1 = Super_167{[property] = true, [colors] = red,cyan}
     document.write("sub1.property = " + sub1.property + "<br>");
     document.write("sub1.colors = " + sub1.colors + "<br>");
     // sub1.property = true
     // sub1.colors = red,cyan
 
-    var sub2 = new Sub();
+    var sub2 = new Sub_167();
+    document.write("sub2 = " + sub2 + "<br>");//sub2 = Super_167{[property] = false, [colors] = red,cyan}
     document.write("sub2.property = " + sub2.property + "<br>");
     document.write("sub2.colors = " + sub2.colors + "<br>");
     // sub2.property = false

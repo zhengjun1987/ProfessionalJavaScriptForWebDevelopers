@@ -29,7 +29,7 @@
     document.write("functionName = " + functionName + "<br>");//functionName = function functionName() { }
     document.write("functionName.name = " + functionName.name + "<br>");//functionName.name = functionName
 
-    if (1) {
+    if (Math.random() > 0.5) {
         //Chrome、Firefox会视判断条件选择不同的函数
         function sayHi() {
             document.write("\"Hi!\" = " + "Hi!" + "<br>");
@@ -47,7 +47,7 @@
     /*
     * 这种写法Safari浏览器才会也跟着做判断
     * */
-    if (1) {
+    if (Math.random() > 0.5) {
         sayHello = function () {
             document.write("\"Hello!\" = " + "Hello!" + "<br>");
         }
@@ -85,10 +85,12 @@
     }).name;
     document.write("name = " + name + "<br>");//""
 
-    var factorial = (function f(num) {
+    var factorial3 = (function f(num) {
         if (num <= 1) return 1;
         return num * f(num - 1);
     });
+
+    document.write("factorial3(6) = " + factorial3(6) + "<br>");//factorial3(6) = 720
 </script>
 </body>
 </html>

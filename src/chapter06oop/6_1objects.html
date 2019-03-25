@@ -41,6 +41,9 @@
         document.write("<br>=========================" + "<br>");
     }
 
+    sayAnObject(Object.getOwnPropertyDescriptor(person2,"age"));
+    //[value] = 29, [writable] = true, [enumerable] = true, [configurable] = true,
+
     /*
     * 数据属性：
     * configurable：是否可以用delete将本属性删除（定义为false之后无法再设定，否则报错）
@@ -64,7 +67,7 @@
     Object.defineProperty(person2, "age", {
         writable: true,
         value: 32,
-        enumerable: true,//设置成false之后无法在for中访问
+        enumerable: false,//设置成false之后无法在for中访问
         configurable: false
     });
     document.write("Object.getOwnPropertyDescriptor(person2,\"age\").configurable = " + Object.getOwnPropertyDescriptor(person2, "age").configurable + "<br>");//false
@@ -146,14 +149,6 @@
             }
         }
     });
-
-    function sayAnObject(object) {
-        document.write("=========================" + "<br>");
-        for (var key in object) {
-            document.write("[" + key + "] = " + object[key] + ", ");
-        }
-        document.write("<br>=========================" + "<br>");
-    }
 
     sayAnObject(defineProperty);
     book.year = 2005;

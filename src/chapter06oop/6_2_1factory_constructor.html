@@ -14,7 +14,7 @@
         document.write("<br>=========================" + "<br>");
     }
 
-    //    工厂模式:如何减少批量创建对象的字面量重复代码
+    //    工厂模式:如何减少批量创建对象的字面量重复代码 —— 没有解决对象识别的问题：即如何确定一个对象的类型
     function createPerson(name, age, job) {
         var object = new Object();
         object.name = name;
@@ -38,14 +38,15 @@
             alert(this.name);
         };
 
+        /*
+        * 这种写法的尴尬之处：
+        *   1.表面上是全局函数，实际使用时仅作用于特定类的实例，名不副实
+        *   2.若对象需要定义很多方法，则需要些大量的全局函数，毫无封装性可言
+        * */
+
         this.sayAge = sayAge;
     }
 
-    /*
-    * 这种写法的尴尬之处：
-    *   1.表面上是全局函数，实际使用时仅作用于特定类的实例，名不副实
-    *   2.若对象需要定义很多方法，则需要些大量的全局函数，毫无封装性可言
-    * */
     function sayAge() {
         alert(this.age);
     }
@@ -56,6 +57,10 @@
 
     var nicholas = new Person("Nicholas", 29, "Software Engineer");//不使用new 引用构造方法（没有return语句的方法）的话会产生返回值为undefined的错误
     var greg = new Person("Greg", 27, "Doctor");
+
+    document.write("(person2 instanceof Person) = " + (person2 instanceof Person) + "<br>");//(person2 instanceof Person) = false
+    document.write("(nicholas instanceof Person) = " + (nicholas instanceof Person) + "<br>");//(nicholas instanceof Person) = true
+    document.write("(greg instanceof Person) = " + (greg instanceof Person) + "<br>");//(greg instanceof Person) = true
 
     document.write("(nicholas.sayName === greg.sayName) = " + (nicholas.sayName === greg.sayName) + "<br>");//(nicholas.sayName === greg.sayName) = false
     /*
@@ -80,7 +85,7 @@
 
     //构造器的另外一种使用方法
     var object = new Object();
-    Person.call(object,"Malt",33,"Whisky");
+    Person.call(object, "Malt", 33, "Whisky");
     document.write("(object.constructor === Person) = " + (object.constructor === Person) + "<br>");//false
     document.write("(object instanceof Person) = " + (object instanceof Person) + "<br>");//false
     document.write("object.name = " + object.name + "<br>");//object.name = Malt

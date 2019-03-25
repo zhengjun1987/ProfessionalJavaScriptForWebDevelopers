@@ -13,11 +13,11 @@
                 // alert(i);
                 document.write("i = " + i + "<br>");
             }
-        })();//语言设计缺陷导致开发者使用这种奇葩的写法来规避问题，避免变量命名污染
 
-        var i;//不做隔离的话，重新声明一个变量，其值仍然是原值，不会改变
-        // alert(i);
-        document.write("i = " + i + "<br>");// 11 或者 undefined
+            var i;//不做隔离的话，重新声明一个变量，其值仍然是原值，不会改变
+            // alert(i);
+            document.write("i = " + i + "<br>");// 11 或者 undefined
+        })();//语言设计缺陷导致开发者使用这种奇葩的写法来规避问题，避免变量命名污染
     }
 
     outputNumbers();

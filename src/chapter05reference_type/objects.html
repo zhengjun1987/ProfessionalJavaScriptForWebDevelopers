@@ -9,21 +9,24 @@
     var person = {name: "Nicholas", age: 34, 5: true};//key被默认为字符串
     document.write("person[\"5\"] = " + person["5"] + "<br>");//person["5"] = true
     document.write("person.name = " + person.name + "<br>");//person.name = Nicholas
+    person["last name"] = "McDonald";
 
     function displayInfo(args) {
         var output = '';
         if (typeof args.name == "string") output += "Name:" + args.name + "\n";
         if (typeof args.age == "number") output += "Age:" + args.age + "\n";
-        alert(output);
+        document.write("output = " + output + "<br>");
     }
 
-    // displayInfo(person);
+    displayInfo(person);//output = Name:Nicholas Age:34
     // displayInfo({
     //     name:"Greg",
     //     age:17
     // })
 
     document.write("person[\"name\"] = " + person["name"] + "<br>");//person["name"] = Nicholas
+    document.write("person = " + person + "<br>");//person = [object Object]
+    document.write("person[\"last name\"] = " + person["last name"] + "<br>");//person["last name"] = McDonaldx
 
     var colors = new Array("red", "blue", "green");
     var a3ElementsArray = new Array(3);
@@ -35,8 +38,13 @@
     document.write("emptyArray.length = " + emptyArray.length + "<br>");//emptyArray.length = 0
     document.write("anotherIntArray.length = " + anotherIntArray.length + "<br>");//anotherIntArray.length = 3
 
+    document.write("(typeof emptyArray) = " + (typeof emptyArray) + "<br>");//(typeof emptyArray) = object
+    document.write("(emptyArray instanceof Array) = " + (emptyArray instanceof Array) + "<br>");//(emptyArray instanceof Array) = true
+    var elementsByTagName = document.getElementsByTagName("*");
+    document.write("(typeof document.getElementsByTagName(\"*\")) = " + (typeof elementsByTagName) + "<br>");
+    //(typeof document.getElementsByTagName("*")) = object
     document.write("Array.isArray(emptyArray) = " + Array.isArray(emptyArray) + "<br>");//Array.isArray(emptyArray) = true
-    document.write("Array.isArray(document.getElementsByTagName(\"*\")) = " + Array.isArray(document.getElementsByTagName("*")) + "<br>");
+    document.write("Array.isArray(document.getElementsByTagName(\"*\")) = " + Array.isArray(elementsByTagName) + "<br>");
     //Array.isArray(document.getElementsByTagName("*")) = false
 
     document.write("colors = " + colors + "<br>");//colors = red,blue,green
@@ -72,6 +80,9 @@
     // colors.join("*") = red * blue * green
     // colors.join("||") = red || blue || green
 
+    /*
+    * 栈方法：push pop
+    * */
     colors.push('cyan', 'black');
     document.write("colors = " + colors + "<br>");//colors = red,blue,green,cyan,black
     var pop = colors.pop();
@@ -80,6 +91,10 @@
 
     colors.push("grey");
     document.write("colors = " + colors + "<br>");
+
+    /*
+    * 序列方法：shift unshift
+    * */
     var shift = colors.shift();
     document.write("shift = " + shift + "<br>");
     document.write("colors = " + colors + "<br>");
@@ -90,6 +105,9 @@
     colors.unshift("yellow");
     document.write("colors = " + colors + "<br>");//colors = yellow,blue,green,cyan,grey
 
+    /*
+    * 排序方法：sort reverse
+    * */
     var numbers = [1, 2, 3, 4, 5];
     numbers.reverse();
     document.write("numbers = " + numbers + "<br>");//numbers = 5,4,3,2,1
@@ -104,10 +122,17 @@
     });
     document.write("counts = " + counts + "<br>");//counts = 0,1,5,10,15
 
+    /*
+    * 操作方法：
+    * concat :Combines two or more arrays.
+    * slice :Returns a section of an array. 第一个参数：起始下标；第二个参数：截止下标，空缺即为末位
+    * splice:Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted elements.
+    * */
     var concat = counts.concat(4, [12, 33]);
     document.write("concat = " + concat + "<br>");//concat = 0,1,5,10,15,4,12,33
     document.write("counts = " + counts + "<br>");//counts = 0,1,5,10,15
     document.write("concat.slice(3) = " + concat.slice(3) + "<br>");//concat.slice(3) = 10,15,4,12,33
+    document.write("concat = " + concat + "<br>");
     document.write("concat.slice(3,4) = " + concat.slice(3, 4) + "<br>");//concat.slice(3,4) = 10
     document.write("concat.slice(-1) = " + concat.slice(-1) + "<br>");//concat.slice(-1) = 33
     document.write("concat.slice(-2,-1) = " + concat.slice(-2, -1) + "<br>");//concat.slice(-2,-1) = 12
@@ -119,7 +144,9 @@
     document.write("concat.splice(1,1,99,81) = " + concat.splice(1, 1, 99, 81) + "<br>");//concat.splice(1,1,99,81) = 5
     document.write("concat = " + concat + "<br>");//concat = 1,99,81,10,15,4,12,33
 
-    //位置方法
+    /*
+    * 位置方法 indexOf lastIndexOf
+    * */
     concat.push(15);
     document.write("concat = " + concat + "<br>");//1,99,81,10,15,4,12,33,15
     document.write("concat.indexOf(15) = " + concat.indexOf(15) + "<br>");//concat.indexOf(15) = 4
@@ -140,6 +167,10 @@
     document.write("(typeof person) = " + (typeof person) + "<br>");
     document.write("(typeof people[0]) = " + (typeof people[0]) + "<br>");
 
+    /*
+    * 迭代方法 every some filter forEach map
+    * 归并方法 reduce reduceRight
+    * */
     var every = nums.every(function (value, index, array) {
         return value > 3;
     });

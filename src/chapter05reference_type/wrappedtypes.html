@@ -7,16 +7,20 @@
 <body>
 <script>
     var text = "some text";
-    var substr = text.substr(2);
-    document.write("substr = " + substr + "<br>");//substr = me text
+    var substring = text.substring(2);
+    document.write("substring = " + substring + "<br>");//substring = me text
 
     var object = new Object("red");
+    document.write("(typeof object) = " + (typeof object) + "<br>");//(typeof object) = object
     document.write("(object instanceof String) = " + (object instanceof String) + "<br>");//(object instanceof String) = true
 
     var num = Number("24");//转型函数
     document.write("(typeof num) = " + (typeof num) + "<br>");//(typeof num) = number
     var obj = new Number("24");//构造函数
     document.write("(typeof obj) = " + (typeof obj) + "<br>");//(typeof obj) = object
+    document.write("(obj instanceof Number) = " + (obj instanceof Number) + "<br>");//(obj instanceof Number) = true
+    document.write("(obj == 24) = " + (obj == 24) + "<br>");//(obj == 24) = true
+    document.write("(obj === 24) = " + (obj === 24) + "<br>");//(obj === 24) = false
 
     var trueObj = new Boolean(true);
     var falseObj = new Boolean(false);

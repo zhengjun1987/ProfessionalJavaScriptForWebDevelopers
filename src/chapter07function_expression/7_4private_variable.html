@@ -43,20 +43,20 @@
     // privateVariable = 12
 
 
-    // function Person(name) {
-    //     this.getName = function () {
-    //         return name;
-    //     };
-    //     this.setName = function (v) {
-    //         name = v;
-    //     }
-    // }
-    //
-    // var person = new Person("Nicholas");
-    // document.write("person.getName() = " + person.getName() + "<br>");//Nicholas
-    // person.setName("Greg");
-    // document.write("person.name = " + person.name + "<br>");//undefined
-    // document.write("person.getName() = " + person.getName() + "<br>");//Greg
+    function Person(name) {
+        this.getName = function () {
+            return name;
+        };
+        this.setName = function (v) {
+            name = v;
+        }
+    }
+
+    var person = new Person("Nicholas");
+    document.write("person.getName() = " + person.getName() + "<br>");//Nicholas
+    person.setName("Greg");
+    document.write("person.name = " + person.name + "<br>");//undefined
+    document.write("person.getName() = " + person.getName() + "<br>");//Greg
 
     (function () {
         /*

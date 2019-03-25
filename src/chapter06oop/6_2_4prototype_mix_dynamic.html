@@ -51,6 +51,38 @@
     document.write("zhengjun.hasOwnProperty(\"friends\") = " + zhengjun.hasOwnProperty("friends") + "<br>");//zhengjun.hasOwnProperty("friends") = true
     // (zhengjun.friends === account.friends) = false
     // (zhengjun.sayName === account.sayName) = true
+
+    /*
+    * 最终改进版 组合使用构造器模式和原型模式:混合模式 （非常完美）
+    * */
+    function Peoson_160(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.friends = ["Jason", "Marty"];
+        if (typeof this.sayName != "function") {
+            Peoson_160.prototype.sayName = function () {
+                document.write("this.name = " + this.name + "<br>");
+            }
+        }
+    }
+
+    var me = new Peoson_160("zhengjun", 22, "student");
+    var him = new Peoson_160("jay", 22, "singer");
+
+    me.friends.push("Choplin");
+    document.write("me.friends = " + me.friends + "<br>");
+    document.write("him.friends = " + him.friends + "<br>");
+    document.write("(me instanceof Peoson_160) = " + (me instanceof Peoson_160) + "<br>");
+    document.write("(him instanceof Peoson_160) = " + (him instanceof Peoson_160) + "<br>");
+    me.sayName();
+    him.sayName();
+    // me.friends = Jason,Marty,Choplin
+    // him.friends = Jason,Marty
+    // (me instanceof Peoson_160) = true
+    // (him instanceof Peoson_160) = true
+    // this.name = zhengjun
+    // this.name = jay
 </script>
 </body>
 </html>

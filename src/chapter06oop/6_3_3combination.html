@@ -5,6 +5,7 @@
     <title>Combination Inheritance</title>
 </head>
 <body>
+<script type="text/javascript" src="objects.js"></script>
 <script>
     /*
     * 复合型继承：综合原型链继承和构造函数借用继承的方法
@@ -38,13 +39,15 @@
     // (Sub.prototype instanceof Super) = false
 
     //现在将原型指向父类,两种写法：
-    // Sub.prototype = new Super();
-    Sub.prototype = Super.prototype;
+    Sub.prototype = new Super();
+    Sub.prototype.constructor = Sub;
+    // Sub.prototype = Super.prototype;
     Sub.prototype.sayAge = function () {
         document.write("this.age = " + this.age + "<br>");
     };
 
     var sub = new Sub("Zheng Jun",32);
+    document.write("sub.toString() = " + sub.toString() + "<br>");
     sub.sayName();//Super.prototype.sayName Zheng Jun
     document.write("(sub instanceof Sub) = " + (sub instanceof Sub) + "<br>");
     document.write("(sub instanceof Super) = " + (sub instanceof Super) + "<br>");

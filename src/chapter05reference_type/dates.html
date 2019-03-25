@@ -7,8 +7,11 @@
 <body>
 <script>
     var date = new Date();
+    document.write("(typeof date) = " + (typeof date) + "<br>");//(typeof date) = object
+    document.write("(date instanceof Date) = " + (date instanceof Date) + "<br>");//(date instanceof Date) = true
     document.write("date = " + date + "<br>");
     // date = Thu Mar 21 2019 23:52:07 GMT+0800 (中国标准时间)
+    document.write("date.toDateString() = " + date.toDateString() + "<br>");
     var now = new Date(Date.parse("Sept 24,2011"));
     document.write("now = " + now + "<br>");
     //now = Sat Sep 24 2011 00:00:00 GMT+0800 (中国标准时间)
@@ -21,7 +24,7 @@
     var all5 = new Date(Date.UTC(2005,4,5,9,5,5,5));
     document.write("all5 = " + all5 + "<br>");
     //all5 = Thu May 05 2005 17:05:05 GMT+0800 (中国标准时间)
-    var now = new Date(Date.now());
+    now = new Date(Date.now());
     document.write("now = " + now + "<br>");
 </script>
 </body>

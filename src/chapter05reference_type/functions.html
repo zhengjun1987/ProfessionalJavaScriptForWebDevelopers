@@ -61,9 +61,9 @@
 
     var data = [{name: "Zachary", age: 28}, {name: "Nicholas", age: 29}];
     data.sort(createCompareFunction("name"));
-    document.write("data = " + data[0].name + "<br>");//Nicholas
+    document.write("data = " + data + "<br>");
     data.sort(createCompareFunction("age"));
-    document.write("data = " + data[0].name + "<br>");//Zachary
+    document.write("data = " + data + "<br>");
 
     function factorial(num) {
         if (num <= 1) return 1;
@@ -93,6 +93,15 @@
     }
     outer();
 
+    /*
+    * 每个函数都包括两个属性：length和prototype
+    * length：函数希望接收的参数个数
+    * prototype：ECMAScript的引用类型 保存其实例方法的真实所在 → 第六章
+    *
+    * 每个函数都有两个方法：apply和call → 其作用都是在特定情境下调用函数
+    * apply： 第一个参数是作用域，第二个参数是参数数组
+    * call：第一个参数是作用域，剩下的是调用参数的逐个列举
+    * */
     document.write("inner.length = " + inner.length + "<br>");
     document.write("factorial.length = " + factorial.length + "<br>");
     document.write("sum.length = " + another.length + "<br>");
@@ -125,11 +134,14 @@
     // this.color = white
     // this.color = cyan
 
-    //方法绑定对象
-    var bindWindow = sayColor.bind(window);
-    document.write("bindWindow() = " + bindWindow() + "<br>");
-    var bindO = sayColor.bind(o);
-    document.write("bindO() = " + bindO() + "<br>");
+    /*
+    * 方法绑定对象 —— 方法与作用域绑定
+    * bind方法：参数是要绑定的作用域引用
+    * */
+    // var bindWindow = sayColor.bind(window);
+    // document.write("bindWindow() = " + bindWindow() + "<br>");
+    // var bindO = sayColor.bind(o);
+    // document.write("bindO() = " + bindO() + "<br>");
     // bindWindow() = white
     // bindO() = cyan
 </script>

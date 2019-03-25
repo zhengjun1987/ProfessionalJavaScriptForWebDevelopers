@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Window Position</title>
+</head>
+<body>
+<script type="text/javascript">
+
+    window.moveTo(600,600);
+    document.write("window.screenLeft = " + window.screenLeft + "<br>");
+    document.write("window.screenX = " + window.screenX + "<br>");
+    document.write("window.screenTop = " + window.screenTop + "<br>");
+    document.write("window.screenY = " + window.screenY + "<br>");
+    var leftPos = (typeof window.screenLeft === "number")?window.screenLeft:window.screenX;
+    var topPos = (typeof window.screenTop === "number")?window.screenTop:window.screenY;
+
+    // alert(leftPos);
+
+    document.write("window.innerWidth = " + window.innerWidth + "<br>");//window.innerWidth = 1280
+    document.write("window.innerHeight = " + window.innerHeight + "<br>");//window.innerHeight = 712
+
+    document.write("document.documentElement.clientWidth = " + document.documentElement.clientWidth + "<br>");
+    document.write("document.documentElement.clientHeight = " + document.documentElement.clientHeight + "<br>");
+
+    document.write("document.body.clientHeight = " + document.body.clientHeight + "<br>");
+    document.write("document.body.clientWidth = " + document.body.clientWidth + "<br>");
+
+    // window.screenLeft = 0
+    // window.screenX = 0
+    // window.screenTop = 0
+    // window.screenY = 0
+    // window.innerWidth = 1280
+    // window.innerHeight = 712
+    // document.documentElement.clientWidth = 1280
+    // document.documentElement.clientHeight = 712
+    // document.body.clientHeight = 144
+    // document.body.clientWidth = 1264
+
+    // window.resizeTo(300,300);
+
+    // window.open("https://www.baidu.com","BAIDU");
+    // var baiduWindow = window.open("https://www.baidu.com","baidu","height=400,width=400,resizable=yes");
+    // baiduWindow.moveTo(100,100);
+
+    // var timeout = setTimeout(function () {
+    //     alert("Hello!");
+    // },3000);
+    // clearTimeout(timeout);
+
+    // var min = 0;
+    // var max = 10;
+    // var intervalId;
+    // function increment() {
+    //     min++;
+    //     alert(min);
+    //     if (min === max) {
+    //         clearInterval(intervalId);
+    //         alert("Done!");
+    //     }
+    // }
+    // intervalId = setInterval(increment,1000);
+
+    // if (confirm("R U Sure?")) {
+    //     alert("I'm glad you are sure!");
+    // } else {
+    //     alert("Sorry!");
+    // }
+
+    // var prompt1 = prompt("What is your name?","");
+    // if (prompt1 !== null){
+    //     alert("Welcome, "+ prompt1);
+    // }
+
+    window.find("百度");
+</script>
+</body>
+</html>

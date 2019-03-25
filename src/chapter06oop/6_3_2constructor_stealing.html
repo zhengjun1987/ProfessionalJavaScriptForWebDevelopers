@@ -16,6 +16,11 @@
     }
 
     var sub = new Sub();
+
+    document.write("(sub instanceof Super) = " + (sub instanceof Super) + "<br>");//(sub instanceof Super) = false
+    document.write("sub.constructor = " + sub.constructor + "<br>");//sub.constructor = function Sub() { Super.call(this); }
+    document.write("sub.toString() = " + sub.toString() + "<br>");//sub.toString() = Sub{[colors] = red,green,blue}
+
     sub.colors.push("black");
     document.write("sub.colors = " + sub.colors + "<br>");
     // sub.colors = red,green,blue,black

@@ -8,7 +8,9 @@
 <script type="text/javascript" src="objects.js"></script>
 <script type="text/javascript">
     function sayAnObject(object) {
-        document.write("object = " + object + "<br>");
+        document.write("====================================<br>");
+        document.write(object + "<br>");
+        document.write("<br>====================================<br>");
     }
 
     /*
@@ -19,11 +21,10 @@
     *   prototype就是通过调用构造函数而创建的实例的原型对象（无需在构造函数中定义实例的属性，而是将这些信息直接添加到原型）
     * */
     function People() {
-        sayAnObject(this)//实际调用此构造函数时，原型对象的信息已经添加好了
     }
 
     function sayName() {
-        alert(this.name);
+        document.write("arguments.callee.name = " + arguments.callee.name + "<br>");
     }
 
     var people = new People();
@@ -45,13 +46,30 @@
 
     var people1 = new People();
     // people1.sayName();//Nicholas
-    document.write("sayName.prototype.constructor = " + sayName.prototype.constructor + "<br>");
-    //sayName.prototype.constructor = function sayName() { alert(this.name); }
-    document.write("sayName.prototype = " + sayName.prototype + "<br>");
-    document.write("sayName.constructor = " + sayName.constructor + "<br>");
 
-    document.write("people.sayName == people1.sayName = " + (people.sayName === people1.sayName) + "<br>");
-    // people.sayName == people1.sayName = true
+    /*
+    * 下面这句赋值动作只是在实例people的头上添加了一个自有的新属性name，覆盖掉原型__proto__上的name属性
+    * */
+    people.name = "Greg";
+    document.write("people.name = " + people.name + "<br>");//people.name = Greg
+    document.write("people.__proto__.name = " + people.__proto__.name + "<br>");//people.__proto__.name = Nicholas
+    document.write("people1.name = " + people1.name + "<br>");//people1.name = Nicholas
+
+    /*
+    * 下面这句判断揭示了构造方法与类型实例之间的关系
+    * */
+    document.write("(people.__proto__ === People.prototype) = " + (people.__proto__ === People.prototype) + "<br>");
+    //(people.__proto__ === People.prototype) = true
+    document.write("(people1.__proto__ === People.prototype) = " + (people1.__proto__ === People.prototype) + "<br>");
+    //(people1.__proto__ === People.prototype) = true
+
+    /*
+    * 同类型的不同实例所拥有的原型对象是同一个
+    * */
+    People.prototype.name = "Michael";
+    document.write("people.name = " + people.name + "<br>");//people.name = Greg
+    document.write("people1.name = " + people1.name + "<br>");//people1.name = Michael
+
     /*
     * 协议内容：
     *   1.自定义构造方法——原型对象——原型对象的constructor属性指向该自定义构造方法
@@ -71,13 +89,12 @@
     *       完全重新覆盖原型对象后constructor属性的enumerable特为true，除非使用Object.defineProperty指定为false（所以一般不建议完全重新指定构造函数的原型对象）
     * */
 
-    sayAnObject(People.prototype);//[name] = Nicholas, [age] = 29, [job] = Software Engineer, [sayName] = function sayName() { alert(this.name); },
-    sayAnObject(sayName.prototype);//空白
+    sayAnObject(People.prototype);//[name] = Michael, [age] = 29, [job] = Software Engineer, [sayName] = function sayName() { alert(this.name); },
 
     document.write("(Object.getPrototypeOf(people) === People.prototype) = " + (Object.getPrototypeOf(people) === People.prototype) + "<br>");
     //(Object.getPrototypeOf(people) === People.prototype) = true
-    document.write("(people.prototype === People.prototype) = " + (people.prototype === People.prototype) + "<br>");
-    sayAnObject(people.prototype);//空白
+    document.write("(people.prototype === People.prototype) = " + (people.prototype === People.prototype) + "<br>");//(people.prototype === People.prototype) = false
+    sayAnObject(people.prototype);//object = undefined 访问一个实例对象的prototype属性无意义
     sayAnObject(people.__proto__);//[name] = Nicholas, [age] = 29, [job] = Software Engineer, [sayName] = function sayName() { alert(this.name); }
     document.write("people.hasOwnProperty(\"__proto__\") = " + people.hasOwnProperty("__proto__") + "<br>");//false
     sayAnObject(People.prototype);//[name] = Nicholas, [age] = 29, [job] = Software Engineer, [sayName] = function sayName() { alert(this.name); }
@@ -89,14 +106,12 @@
     // sayName.prototype.constructor = function sayName() { alert(this.name); }
 
     document.write("People.constructor = " + People.constructor + "<br>");
-    document.write("people1.hasOwnProperty(\"name\") = " + people1.hasOwnProperty("name") + "<br>");//false
-    people1.name = "Greg";
-    document.write("people1.hasOwnProperty(\"name\") = " + people1.hasOwnProperty("name") + "<br>");//true
-    sayAnObject(people1);//[name] = Greg, [age] = 29, [job] = Software Engineer
+    /*
+    * hasOwnProperty方法 检查属性是否源自于实例对象自身
+    * */
+    document.write("people.hasOwnProperty(\"name\") = " + people.hasOwnProperty("name") + "<br>");//people.hasOwnProperty("name") = true
+    document.write("people1.hasOwnProperty(\"name\") = " + people1.hasOwnProperty("name") + "<br>");//people1.hasOwnProperty("name") = false
     document.write("People.prototype.isPrototypeOf(people1) = " + People.prototype.isPrototypeOf(people1) + "<br>");//true
-    document.write("people1.name = " + people1.name + "<br>");
-    people1.name = undefined;
-    document.write("people1.name = " + people1.name + "<br>");
     document.write("Object.keys(people1) = " + Object.keys(people1) + "<br>");//Object.keys(people1) = name
     document.write("Object.getOwnPropertyNames(People.prototype) = " + Object.getOwnPropertyNames(People.prototype) + "<br>");//constructor,name,age,job,sayName
     document.write("People.prototype.hasOwnProperty(\"constructor\") = " + People.prototype.hasOwnProperty("constructor") + "<br>");//true
@@ -127,9 +142,31 @@
     }
 
     /*
-    * 原型换这种写法，会导致实例的constructor变成Object(),匪夷所思
+    * 原型换这种写法，会导致实例的constructor变成Object()
+    * 下面这种写法的本质是抛弃了runtime配置给实例的原型，自行手动给实例创建了一个新的Object原型
+    * */
+    // PersonNeo.prototype = {
+    //     name: "Nicholas",
+    //     age: 29,
+    //     job: "Software Engineer",
+    //     friends: ["Jason", "Marty"],
+    //     sayName: sayName
+    // };
+
+    /*
+    * 沿用上面的写法
+    * */
+    // PersonNeo.prototype.name = "Nicholas";
+    // PersonNeo.prototype.age = 29;
+    // PersonNeo.prototype.job = "Software Engineer";
+    // PersonNeo.prototype.friends = ["Jason","Marty"];
+    // PersonNeo.prototype.sayName = sayName;
+
+    /*
+    * 手动指定新建的原型constructor 也可以！！！
     * */
     PersonNeo.prototype = {
+        constructor:PersonNeo,
         name: "Nicholas",
         age: 29,
         job: "Software Engineer",
@@ -140,7 +177,7 @@
     var friend = new PersonNeo();
     document.write("(friend instanceof Object) = " + (friend instanceof Object) + "<br>");
     document.write("friend instanceof PersonNeo = " + (friend instanceof PersonNeo) + "<br>");
-    document.write("(friend.constructor === PersonNeo) = " + (friend.constructor == PersonNeo) + "<br>");
+    document.write("(friend.constructor === PersonNeo) = " + (friend.constructor === PersonNeo) + "<br>");
     // (friend instanceof Object) = true
     // friend instanceof PersonNeo = true
     // (friend.constructor == Object) = true

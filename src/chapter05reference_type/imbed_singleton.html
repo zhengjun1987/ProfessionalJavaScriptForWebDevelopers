@@ -6,7 +6,9 @@
 </head>
 <body>
 <script>
-    <!--Global对象-->
+    /*
+    * Global对象 —— 某种意义上终极兜底的对象，凡是不属于其他对象的属性和方法都是Global对象的（类似于parseInt、isNaN等方法）
+    * */
     var url = "http://www.wrox.com/illegal value.html#start";
     document.write("encodeURI(url) = " + encodeURI(url) + "<br>");
     //encodeURI(url) = http://www.wrox.com/illegal%20value.html#start
@@ -25,6 +27,10 @@
     // eval("alert(helloWorld);");
     eval("function sayHi(){ alert('Hi'); }")
     // sayHi();
+
+    var red = "red";
+    document.write("window.red = " + window.red + "<br>");//window.red = red
+    document.write("this.red = " + this.red + "<br>");//this.red = red
 
     //    Math对象
     document.write("Math.E = " + Math.E + "<br>");

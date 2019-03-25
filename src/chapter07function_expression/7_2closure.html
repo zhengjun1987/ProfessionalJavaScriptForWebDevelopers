@@ -82,6 +82,8 @@
             return this.name;
         }
     };
+    document.write("another.getName() = " + another.getName() + "<br>");//another.getName() = My Object
+    document.write("((another.getName)()) = " + ((another.getName)()) + "<br>");//((another.getName)()) = My Object
     document.write("(another.getName = another.getName)() = " + (another.getName = another.getName)() + "<br>");
     //(another.getName = another.getName)() = The Window
 

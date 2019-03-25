@@ -11,8 +11,15 @@
     person.name = "Nicholas";
     document.write(person.name + "<br>");//Nicholas
     document.write(person.toString() + "<br>");//[object Object]
+    document.write("person.length = " + person.length + "<br>");
+    document.write("person[0] = " + person[0] + "<br>");
+    for (var item in person) {
+        document.write("person.item = " + item.valueOf() + " => " + person[item] + "<br>");
+    }
+    document.write("person.hasOwnProperty(\"name\") = " + person.hasOwnProperty("name") + "<br>");
 
     function addTen(num) {
+        document.write("(typeof arguments) = " + (typeof arguments) + "<br>");//(typeof arguments) = object
         num += 10;
         return num;
     }
@@ -26,15 +33,19 @@
     document.write("count instanceof Number = " + (count instanceof Number) + "<br>");
 
     var color = "blue";
+
     function changeColor() {
         var anotherColor = "red";
+
         function swapColors() {
             var temp = anotherColor;
             anotherColor = color;
             color = temp;
         }
+
         swapColors();//swapColors仅能在此范围内访问
     }
+
     changeColor();
     document.write("color = " + color + "<br>");//color = red
 
@@ -46,19 +57,23 @@
         return url;//此处的url不受with语句的局部变量范围控制，可以延长至此
     }
 
-    if (true) { var colorN = "blue"}
-    document.write("colorN = " + colorN + "<br>");//colorN = blue JavaScript没有block级别的作用域，if、for、switch等语句产生的变量不属于局部变量
+    if (true) {
+        var colorN = "blue"
+    }
+    document.write("colorN = " + colorN + "<br>");//colorN = blue
+    // JavaScript没有block级别的作用域，if、for、switch等语句产生的变量不属于局部变量
     for (var i = 0; i < 10; i++) {
         changeColor();
     }
     document.write("i = " + i + "<br>");//i = 10
 
     function add(num1, num2) {
-        var sum = num1+num2;//在方法作用域外部使用这个sum会出错：Uncaught ReferenceError: sum is not defined
-        sumGlobal = num1+num2;//定义了一个全局变量
+        var sum = num1 + num2;//在方法作用域外部使用这个sum会出错：Uncaught ReferenceError: sum is not defined
+        sumGlobal = num1 + num2;//定义了一个全局变量
         return sum;
     }
-    add(1,2);
+
+    add(1, 2);
     // document.write("sum = " + sum + "<br>");//Uncaught ReferenceError: sum is not defined
     document.write("sumGlobal = " + sumGlobal + "<br>");//sumGlobal = 3
 </script>
