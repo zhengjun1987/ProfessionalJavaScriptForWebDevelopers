@@ -6,22 +6,22 @@
 </head>
 <body>
 <script>
-    var date = new Date();
+    let date = new Date();
     document.write("(typeof date) = " + (typeof date) + "<br>");//(typeof date) = object
     document.write("(date instanceof Date) = " + (date instanceof Date) + "<br>");//(date instanceof Date) = true
     document.write("date = " + date + "<br>");
     // date = Thu Mar 21 2019 23:52:07 GMT+0800 (中国标准时间)
     document.write("date.toDateString() = " + date.toDateString() + "<br>");
-    var now = new Date(Date.parse("Sept 24,2011"));
+    let now = new Date(Date.parse("Sept 24,2011"));
     document.write("now = " + now + "<br>");
     //now = Sat Sep 24 2011 00:00:00 GMT+0800 (中国标准时间)
-    var birth = new Date("Aug 2,1987");
+    let birth = new Date("Aug 2,1987");
     document.write("birth = " + birth + "<br>");
     //birth = Sun Aug 02 1987 00:00:00 GMT+0900 (中国夏令时间)
-    var y2k = new Date(Date.UTC(2000,0));
+    let y2k = new Date(Date.UTC(2000,0));
     document.write("y2k = " + y2k + "<br>");
     //y2k = Sat Jan 01 2000 08:00:00 GMT+0800 (中国标准时间)
-    var all5 = new Date(Date.UTC(2005,4,5,9,5,5,5));
+    let all5 = new Date(Date.UTC(2005,4,5,9,5,5,5));
     document.write("all5 = " + all5 + "<br>");
     //all5 = Thu May 05 2005 17:05:05 GMT+0800 (中国标准时间)
     now = new Date(Date.now());

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebGL Context</title>
+</head>
+<body>
+<img src="../images/mmlq3.png" alt="秘密恋情3" height="360" width="360">
+<canvas id="drawing" width="360" height="360">A drawing of something.</canvas>
+<script type="text/javascript">
+    var drawing = document.getElementById("drawing")
+    var gl = drawing.getContext("experimental-webgl")
+    console.log("====== gl = ", gl)
+    var webglContext = drawing.getContext("webgl")
+    console.log("====== webglContext = ", webglContext)
+
+    console.log("====== (gl === webglContext) = ", (gl === webglContext))
+
+    var webgl2Context = drawing.getContext("webgl2")
+    console.log("====== webgl2Context = ", webgl2Context)
+    console.log("====== (webglContext === webgl2Context) = ", (webglContext === webgl2Context))
+
+    console.log("====== gl.COLOR_BUFFER_BIT = ", gl.COLOR_BUFFER_BIT)
+    gl.clearColor(0, 0, 0, 1)
+    gl.clear(gl.COLOR_BUFFER_BIT)
+    // var webGLBuffer = gl.createBuffer()
+    // gl.bindBuffer(gl.ARRAY_BUFFER, webGLBuffer)
+    // gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0.5, 1]), gl.STATIC_DRAW)
+    // var error = gl.getError()
+    // console.log("====== error = ", error)
+    // while (error) {
+    //     console.log("====== error = ", error)
+    //     error = gl.getError()
+    // }
+
+    var image = document.images[0]
+    image.onload = function () {
+        console.log("============== 15_3_02webgl_context.onload ==============")
+        var glTexture = gl.createTexture()
+        gl.bindTexture(gl.TEXTURE_2D, glTexture)
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+        gl.bindTexture(gl.TEXTURE_2D, null)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capacity Test</title>
+</head>
+<body>
+<h1 id="title">大威天龙</h1>
+<script type="text/javascript">
+    function getElement(id) {
+        document.write("<br>========== document.all = " + document.all + "<br>")
+        for (let element in document.all) {
+            document.write("<br>========== document.all[" + element + "] = " + document.all[element].toString() + "<br>")
+        }
+        // if (document.all) {
+        //     return document.all[id]
+        // }
+        // if (document.getElementById) {
+        //     return document.getElementById(id)
+        // }
+        // http://localhost:63342/ProfessionalJavaScriptForWebDevelopers/src/chapter09client_sensor/09_01_01capacity_test.html?_ijt=a3b2qu8ioi8utpvl3r3hckrcgf
+        return !!document.all ? document.all[id]
+            : document.getElementById(id)
+    }
+
+    document.write("<br>========== getElement(\"title\") = " + getElement("title") + "<br>")
+</script>
+</body>
+</html>

@@ -7,13 +7,13 @@
 <body>
 <a href="../chapter03basic_concepts/basical.html">BASIC CONCEPTS</a>
 <script>
-    var person = new Object();
+    let person = new Object();
     person.name = "Nicholas";
     document.write(person.name + "<br>");//Nicholas
     document.write(person.toString() + "<br>");//[object Object]
     document.write("person.length = " + person.length + "<br>");
     document.write("person[0] = " + person[0] + "<br>");
-    for (var item in person) {
+    for (let item in person) {
         document.write("person.item = " + item.valueOf() + " => " + person[item] + "<br>");
     }
     document.write("person.hasOwnProperty(\"name\") = " + person.hasOwnProperty("name") + "<br>");
@@ -24,21 +24,21 @@
         return num;
     }
 
-    var count = 20;
-    var result = addTen(count);
+    let count = 20;
+    let result = addTen(count);
     document.write("count = " + count + "<br>");//count = 20
     document.write("result = " + result + "<br>");//result = 30
 
     document.write("person instanceof Object = " + (person instanceof Object) + "<br>");
     document.write("count instanceof Number = " + (count instanceof Number) + "<br>");
 
-    var color = "blue";
+    let color = "blue";
 
     function changeColor() {
-        var anotherColor = "red";
+        let anotherColor = "red";
 
         function swapColors() {
-            var temp = anotherColor;
+            let temp = anotherColor;
             anotherColor = color;
             color = temp;
         }
@@ -50,25 +50,25 @@
     document.write("color = " + color + "<br>");//color = red
 
     function buildUrl(location) {
-        var qs = "?debug=true";
+        let qs = "?debug=true";
         with (location) {
-            var url = href + qs;
+            let url = href + qs;
         }
         return url;//此处的url不受with语句的局部变量范围控制，可以延长至此
     }
 
     if (true) {
-        var colorN = "blue"
+        let colorN = "blue"
     }
     document.write("colorN = " + colorN + "<br>");//colorN = blue
     // JavaScript没有block级别的作用域，if、for、switch等语句产生的变量不属于局部变量
-    for (var i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
         changeColor();
     }
     document.write("i = " + i + "<br>");//i = 10
 
     function add(num1, num2) {
-        var sum = num1 + num2;//在方法作用域外部使用这个sum会出错：Uncaught ReferenceError: sum is not defined
+        let sum = num1 + num2;//在方法作用域外部使用这个sum会出错：Uncaught ReferenceError: sum is not defined
         sumGlobal = num1 + num2;//定义了一个全局变量
         return sum;
     }

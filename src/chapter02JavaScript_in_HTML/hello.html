@@ -10,7 +10,7 @@
     <!-- async属性告诉浏览器立即下载外部JavaScript文件，不保证其加载执行顺序，async属性只对外部脚本有效 -->
     <script type="text/javascript">
         function sayHi() {
-            alert("Hi!");
+            alert("Hi!")
         }
     </script>
     <script src="hello.js" type="text/javascript"></script>
@@ -19,21 +19,22 @@
 </head>
 <body>
 
-    <h1>Here is the content.</h1>
+<h1>Here is the content.</h1>
 <!-- 与解析嵌入式JavaScript代码一样，解析外部JavaScript代码时页面的处理也会暂停-->
 <!-- .js的后缀非必须，浏览器不检查扩展名。但服务器看扩展名决定MIME应用类型，所以尽量保留-->
 <!-- defer属性：立即下载，延迟到页面加载好之后再执行 只对外部脚本有效 -->
 <!--已经引入外部JavaScript文件的script标记不应再添加嵌入代码，会被忽略-->
 <script>
     function sayScript() {
-        alert("<\/script>");
+        alert("<\/script>")
     }
+
     // 单行注释
     /*
     * 此处是
-    多行注释
+    * 多行注释
     * */
-    sayScript();
+    sayScript()
 </script>
 <!--//尾标省略只能在XHTML中兼容，HTML不接受，IE也不兼容-->
 </body>

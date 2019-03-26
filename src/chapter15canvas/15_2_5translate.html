@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变换、保存和恢复</title>
+</head>
+<body>
+<canvas id="drawing" width="200" height="200">A drawing of something.</canvas>
+<script type="text/javascript">
+    var drawing = document.getElementById("drawing")
+    if (drawing.getContext) {
+        var context = drawing.getContext("2d")
+        // context.beginPath()
+        // context.arc(100, 100, 99, 0, Math.PI * 2, false)
+        // context.moveTo(194, 100)
+        // context.arc(100, 100, 94, 0, Math.PI * 2, false)
+        // context.translate(100, 100)
+        // context.rotate(Math.PI / 2)
+        // context.moveTo(0, 0)
+        // context.lineTo(0, -85)
+        // context.moveTo(0, 0)
+        // context.lineTo(-65, 0)
+        // context.stroke()
+
+        console.log("====== context = ", context)
+        // CanvasRenderingContext2D
+        // canvas: <canvas id="drawing">
+        // fillStyle: "#ff0000"
+        // font: "10px sans-serif"
+        // globalAlpha: 1
+        // globalCompositeOperation: "source-over"
+        // imageSmoothingEnabled: true
+        // imageSmoothingQuality: "low"
+        // lineCap: "butt"
+        // lineDashOffset: 0
+        // lineJoin: "miter"
+        // lineWidth: 1
+        // miterLimit: 10
+        // shadowBlur: 0
+        // shadowColor: "rgba(0, 0, 0, 0)"
+        // shadowOffsetX: 0
+        // shadowOffsetY: 0
+        // strokeStyle: "#000000"
+        // textAlign: "start"
+        // textBaseline: "alphabetic"
+        // webkitBackingStorePixelRatio: 1
+        // webkitImageSmoothingEnabled: true
+        // webkitLineDash: [] (0)
+        // webkitLineDashOffset: 0
+        context.fillStyle = "red"
+        context.save()
+        context.fillStyle = "#00ff00"
+        context.translate(100, 100)
+        context.save()
+        context.fillStyle = "#0000ff"
+        context.fillRect(0, 0, 100, 100)
+        context.restore()
+        context.fillRect(10, 10, 100, 100)
+        context.restore()
+        context.fillRect(10, 10, 100, 100)
+        // var dataURL = drawing.toDataURL("image/png")
+        // var image = document.createElement("image")
+        // image.src = dataURL
+        // document.body.appendChild(image)
+    }
+</script>
+</body>
+</html>

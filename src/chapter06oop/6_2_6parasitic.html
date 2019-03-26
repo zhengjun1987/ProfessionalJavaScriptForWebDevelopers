@@ -8,33 +8,35 @@
 <script>
 
     function Person(name, age, job) {
-        var object = {};
-        object.name = name;
-        object.age = age;
-        object.job = job;
+        let object = {}
+        object.name = name
+        object.age = age
+        object.job = job
         object.sayName = function () {
-            alert(this.name);
-        };
-        return object;//构造函数返回的对象 与 构造函数或者构造函数原型 没有关系
+            alert(this.name)
+        }
+        return object//构造函数返回的对象 与 构造函数或者构造函数原型 没有关系
     }
-    var zheng = new Person("zhengjun",32,"engineer");//此处调用构造函数的时候new可要可不要，很微妙，估计加上new会损耗很多
-    document.write("zheng.constructor = " + zheng.constructor + "<br>");
-    document.write("(typeof zheng) = " + (typeof zheng) + "<br>");
-    document.write("(zheng instanceof Person) = " + (zheng instanceof Person) + "<br>");
+
+    let zheng = new Person("zhengjun", 32, "engineer")//此处调用构造函数的时候new可要可不要，很微妙，估计加上new会损耗很多
+    document.write("zheng.constructor = " + zheng.constructor + "<br>")
+    document.write("(typeof zheng) = " + (typeof zheng) + "<br>")
+    document.write("(zheng instanceof Person) = " + (zheng instanceof Person) + "<br>")
     // zheng.constructor = function Object() { [native code] }
     // (typeof zheng) = object
     // (zheng instanceof Person) = false
 
     function SpecialArray() {
-        var arr = [];
-        arr.push.apply(arr,arguments);
+        let arr = []
+        arr.push.apply(arr, arguments)
         arr.toPipedString = function () {
             return arr.join(" | ")
-        };
-        return arr;
+        }
+        return arr
     }
-    var specialArray = SpecialArray("red","blue","green");
-    document.write("specialArray.toPipedString() = " + specialArray.toPipedString() + "<br>");//specialArray.toPipedString() = red | blue | green
+
+    let specialArray = SpecialArray("red", "blue", "green")
+    document.write("specialArray.toPipedString() = " + specialArray.toPipedString() + "<br>")//specialArray.toPipedString() = red | blue | green
 </script>
 </body>
 </html>

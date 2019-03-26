@@ -7,27 +7,29 @@
 <body>
 <script type="text/javascript" src="../chapter06oop/objects.js"></script>
 <script>
-    var age = 29;
-    function sayAge(){
-        document.write("window.age = " + window.age + "<br>");
+    let age = 29
+
+    function sayAge() {
+        document.write("window.age = " + window.age + "<br>")
     }
-    window.color = 'red';
-    document.write("window.age = " + window.age + "<br>");//29
-    document.write("window.color = " + window.color + "<br>");//red
-    sayAge();//window.age = 29
-    window.sayAge();//window.age = 29
-    document.write("window.constructor = " + window.constructor + "<br>");//window.constructor = function Window() { [native code] }
+
+    window.color = 'red'
+    document.write("window.age = " + window.age + "<br>")//29
+    document.write("window.color = " + window.color + "<br>")//red
+    sayAge()//window.age = 29
+    window.sayAge()//window.age = 29
+    document.write("window.constructor = " + window.constructor + "<br>")//window.constructor = function Window() { [native code] }
 
     /*
     * 全局变量无法通过delete关键字删除
     * 直接定义在window对象上的属性可以通过delete关键字删除
     * */
-    document.write("(delete window.age) = " + (delete window.age) + "<br>");//false
-    document.write("(delete window.sayAge) = " + (delete window.sayAge) + "<br>");//false
-    document.write("(delete window.color) = " + (delete window.color) + "<br>");//true
-    document.write("window.color = " + window.color + "<br>");
-    document.write("window.age = " + window.age + "<br>");
-    // var ownPropertyNames = Object.getOwnPropertyNames(window);
+    document.write("(delete window.age) = " + (delete window.age) + "<br>")//false
+    document.write("(delete window.sayAge) = " + (delete window.sayAge) + "<br>")//false
+    document.write("(delete window.color) = " + (delete window.color) + "<br>")//true
+    document.write("window.color = " + window.color + "<br>")
+    document.write("window.age = " + window.age + "<br>")
+    // let ownPropertyNames = Object.getOwnPropertyNames(window);
 
     // document,ownPropertyNames,window,NaN,age,Infinity,undefined,self,name,location,history,
     // locationbar,menubar,personalbar,scrollbars,statusbar,toolbar,status,closed,frames,
@@ -115,8 +117,8 @@
 
     // document.write("top = " + Object.getOwnPropertyNames(top) + "<br>");
     // document.write("frames = " + Object.getOwnPropertyNames(frames) + "<br>");
-    document.write("window = " + window + "<br>");//空白
-    document.write("window.__proto__ = " + window.__proto__ + "<br>");
+    document.write("window = " + window + "<br>")//空白
+    document.write("window.__proto__ = " + window.__proto__ + "<br>")
     // [addEventListener] = function addEventListener() { [native code] },
     // [removeEventListener] = function removeEventListener() { [native code] },
     // [dispatchEvent] = function dispatchEvent() { [native code] }

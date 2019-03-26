@@ -6,26 +6,26 @@
 </head>
 <body>
 <script>
-    var text = "some text";
-    var substring = text.substring(2);
+    let text = "some text";
+    let substring = text.substring(2);
     document.write("substring = " + substring + "<br>");//substring = me text
 
-    var object = new Object("red");
+    let object = new Object("red");
     document.write("(typeof object) = " + (typeof object) + "<br>");//(typeof object) = object
     document.write("(object instanceof String) = " + (object instanceof String) + "<br>");//(object instanceof String) = true
 
-    var num = Number("24");//转型函数
+    let num = Number("24");//转型函数
     document.write("(typeof num) = " + (typeof num) + "<br>");//(typeof num) = number
-    var obj = new Number("24");//构造函数
+    let obj = new Number("24");//构造函数
     document.write("(typeof obj) = " + (typeof obj) + "<br>");//(typeof obj) = object
     document.write("(obj instanceof Number) = " + (obj instanceof Number) + "<br>");//(obj instanceof Number) = true
     document.write("(obj == 24) = " + (obj == 24) + "<br>");//(obj == 24) = true
     document.write("(obj === 24) = " + (obj === 24) + "<br>");//(obj === 24) = false
 
-    var trueObj = new Boolean(true);
-    var falseObj = new Boolean(false);
+    let trueObj = new Boolean(true);
+    let falseObj = new Boolean(false);
     document.write("(falseObj && true) = " + (falseObj && true) + "<br>");//(falseObj && true) = true
-    var falseValue = false;
+    let falseValue = false;
     document.write("(falseValue && true) = " + (falseValue && true) + "<br>");//(falseValue && true) = false
     document.write("(typeof falseObj) = " + (typeof falseObj) + "<br>");
     document.write("(typeof falseValue) = " + (typeof falseValue) + "<br>");
@@ -37,8 +37,8 @@
     // (falseValue instanceof Boolean) = false
 
 
-    var numberObj = new Number(10);
-    var num = 10;
+    let numberObj = new Number(10);
+    let num = 10;
     document.write("num.toString() = " + num.toString() + "<br>");
     document.write("num.toString(2) = " + num.toString(2) + "<br>");
     document.write("num.toString(8) = " + num.toString(8) + "<br>");
@@ -51,7 +51,7 @@
     // num.toString(16) = a
 
     document.write("num.toFixed(2) = " + num.toFixed(2) + "<br>");
-    var pi = 3.1415926;
+    let pi = 3.1415926;
     document.write("pi.toFixed(3) = " + pi.toFixed(3) + "<br>");
     // num.toFixed(2) = 10.00
     // pi.toFixed(3) = 3.142
@@ -66,8 +66,8 @@
     // (num instanceof Number) = false
 
 
-    var stringObj = new String("hello,world");
-    var stringValue = "hello,world";
+    let stringObj = new String("hello,world");
+    let stringValue = "hello,world";
     document.write("stringObj.length = " + stringObj.length + "<br>");
     document.write("stringValue.length = " + stringValue.length + "<br>");
     // stringObj.length = 11
@@ -99,9 +99,9 @@
     //stringValue.toUpperCase() = HELLO,WORLD
     //stringValue.toUpperCase().toLowerCase() = hello,world
 
-    var text = "cat,bat,sat,fat";
-    var match = text.match(/.at/g);
-    for (var i = 0; i < match.length; i++) {
+    let text = "cat,bat,sat,fat";
+    let match = text.match(/.at/g);
+    for (let i = 0; i < match.length; i++) {
         document.write("match[" + i + "] = " + match[i] + "<br>");
     }
     // match[0] = cat
@@ -130,21 +130,21 @@
         });
     }
 
-    var htmlEscape1 = htmlEscape("<p class=\"greeting\">Hello world!</p>");
+    let htmlEscape1 = htmlEscape("<p class=\"greeting\">Hello world!</p>");
     // alert(htmlEscape1);//&lt;p class=&quot;greeting&quot;&gt;Hello world!&lt;/p&gt;
     // document.write(htmlEscape1 + " <br> ");
 
-    var colorText = "red,blue,green,yellow";
-    var strings = colorText.split(",");
+    let colorText = "red,blue,green,yellow";
+    let strings = colorText.split(",");
     document.write("colorText.split(\",\") = " + strings + "<br>");
     //第二个参数设定新数组元素个数
-    var strings1 = colorText.split(",",2);
+    let strings1 = colorText.split(",",2);
     // colorText.split(",") = red,blue,green,yellow
     document.write("colorText.split(\",\",2) = " + strings1 + "<br>");
     // colorText.split(",",2) = red,blue
     document.write("colorText.split(/[^\\,]+/) = " + colorText.split(/[^\,]+/) + "<br>");//colorText.split(/[^\,]+/) = ,,,,,,,
 
-    var yellow = "yellow";
+    let yellow = "yellow";
     document.write("yellow.localeCompare(\"brick\") = " + yellow.localeCompare("brick") + "<br>");
     document.write("yellow.localeCompare(\"yellow\") = " + yellow.localeCompare("yellow") + "<br>");
     document.write("yellow.localeCompare(\"zoo\") = " + yellow.localeCompare("zoo") + "<br>");

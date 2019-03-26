@@ -6,68 +6,68 @@
 //单行注释
 
 function doSomething() {
-    "use strict";//此句是一个编译指示，指示JavaScript引擎切换到严格模式
+    "use strict"//此句是一个编译指示，指示JavaScript引擎切换到严格模式
 //    函数体
 }
 
 function test() {
-    var local = 'hi';//方法内部局部变量
-    globalVariable = "Hi";//没有var作为前缀的赋值，全局变量
+    let local = 'hi'//方法内部局部变量
+    globalVariable = "Hi"//没有var作为前缀的赋值，全局变量
 }
 
-test();
-document.write("globalVariable = " + globalVariable + "<br>");//globalVariable = Hi
+test()
+document.write("globalVariable = " + globalVariable + "<br>")//globalVariable = Hi
 
 
-var num = undefined;
-document.write("(typeof num) = " + (typeof num) + "<br>");//(typeof num) = undefined
+let num = undefined
+document.write("(typeof num) = " + (typeof num) + "<br>")//(typeof num) = undefined
 // alert(num1);//出错
-document.write("(typeof num1) = " + (typeof num1) + "<br>");//(typeof num1) = undefined
-num = 2;
-document.write("(typeof num) = " + (typeof num) + "<br>");//(typeof num) = number
-document.write("(typeof (typeof num)) = " + (typeof (typeof num)) + "<br>");//(typeof (typeof num)) = string
-var arr = [];
-document.write("typeof arr[0] = " + typeof arr[0] + "<br>");//typeof arr[0] = undefined
+document.write("(typeof num1) = " + (typeof num1) + "<br>")//(typeof num1) = undefined
+num = 2
+document.write("(typeof num) = " + (typeof num) + "<br>")//(typeof num) = number
+document.write("(typeof (typeof num)) = " + (typeof (typeof num)) + "<br>")//(typeof (typeof num)) = string
+let arr = []
+document.write("typeof arr[0] = " + typeof arr[0] + "<br>")//typeof arr[0] = undefined
 
 /*
 * null只针对object类型
 * */
-var car = null;
-document.write("typeof car = " + typeof car + "<br>");//typeof car = object
+let car = null
+document.write("typeof car = " + typeof car + "<br>")//typeof car = object
 //undefined派生自null
-document.write("(null == undefined) = " + (null == undefined) + "<br>");//(null == undefined) = true
-document.write("(null === undefined) = " + (null === undefined) + "<br>");
-document.write("(typeof undefined) = " + (typeof undefined) + "<br>");
-document.write("(typeof null) = " + (typeof null) + "<br>");
+document.write("(null == undefined) = " + (null == undefined) + "<br>")//(null == undefined) = true
+document.write("(null === undefined) = " + (null === undefined) + "<br>")
+document.write("(typeof undefined) = " + (typeof undefined) + "<br>")
+document.write("(typeof null) = " + (typeof null) + "<br>")
 
-var found = true;
-var lost = false;
-document.write("typeof = " + typeof found + "<br>");
-document.write("Boolean(\"Hello,World!\") = " + Boolean("Hello,World!") + "<br>");// Boolean("Hello,World!") = true
-document.write("Boolean(\"\") = " + Boolean("") + "<br>");// Boolean("") = false
-document.write("Boolean(\" \") = " + Boolean(" ") + "<br>");//Boolean(" ") = true
-document.write("Boolean(0) = " + Boolean(0) + "<br>");// Boolean(0) = false
-document.write("Boolean(0.1) = " + Boolean(0.1) + "<br>");// Boolean(0.1) = true
-document.write("Boolean(1) = " + Boolean(1) + "<br>");// Boolean(1) = true
-document.write("Boolean(NaN) = " + Boolean(NaN) + "<br>");// Boolean(NaN) = false
-document.write("Boolean(null) = " + Boolean(null) + "<br>");// Boolean(null) = false
-document.write("Boolean(undefined) = " + Boolean(undefined) + "<br>");// Boolean(undefined) = false
-document.write("Boolean({}) = " + Boolean({}) + "<br>");// Boolean({}) = true // {} === new Object{} != null
+let found = true
+let lost = false
+document.write("typeof = " + typeof found + "<br>")
+document.write("Boolean(\"Hello,World!\") = " + Boolean("Hello,World!") + "<br>")// Boolean("Hello,World!") = true
+document.write("Boolean(\"\") = " + Boolean("") + "<br>")// Boolean("") = false
+document.write("Boolean(\" \") = " + Boolean(" ") + "<br>")//Boolean(" ") = true
+document.write("Boolean(0) = " + Boolean(0) + "<br>")// Boolean(0) = false
+document.write("Boolean(0.1) = " + Boolean(0.1) + "<br>")// Boolean(0.1) = true
+document.write("Boolean(1) = " + Boolean(1) + "<br>")// Boolean(1) = true
+document.write("Boolean(NaN) = " + Boolean(NaN) + "<br>")// Boolean(NaN) = false
+document.write("Boolean(null) = " + Boolean(null) + "<br>")// Boolean(null) = false
+document.write("Boolean(undefined) = " + Boolean(undefined) + "<br>")// Boolean(undefined) = false
+document.write("Boolean({}) = " + Boolean({}) + "<br>")// Boolean({}) = true // {} === new Object{} != null
 
 
-var decimalInt = 55;
-var octInt = 070;//八进制
-document.write("octInt = " + octInt + "<br>");//octInt = 56
-var heximalInt = 0x1f;//十六进制
-document.write("heximalInt = " + heximalInt + "<br>");//heximalInt = 31
-document.write("0b10000010 = " + 0b10000010 + "<br>");//0b10000010 = 130
-var floatNum1 = 1.1;
-var floatNum2 = .1;
-var floatNum3 = 3.125e7;
-var b = .2;
-document.write("(floatNum2 + b) = " + (floatNum2 + b) + "<br>");//(floatNum2 + b) = 0.30000000000000004
+let decimalInt = 55
+let octInt = 070//八进制
+document.write("octInt = " + octInt + "<br>")//octInt = 56
+let heximalInt = 0x1f//十六进制
+document.write("heximalInt = " + heximalInt + "<br>")//heximalInt = 31
+document.write("0b10000010 = " + 0b10000010 + "<br>")//0b10000010 = 130
+let floatNum1 = 1.1
+let floatNum2 = .1
+let floatNum3 = 3.125e7
+let b = .2
+document.write("(floatNum2 + b) = " + (floatNum2 + b) + "<br>")//(floatNum2 + b) = 0.30000000000000004
 
-document.write("isFinite(Number.MAX_VALUE + Number.MAX_VALUE) = " + isFinite(Number.MAX_VALUE + Number.MAX_VALUE) + "<br>");
+document.write("isFinite(Number.MAX_VALUE + Number.MAX_VALUE) = " + isFinite(Number.MAX_VALUE + Number.MAX_VALUE) + "<br>")
 // isFinite(Number.MAX_VALUE + Number.MAX_VALUE) = false
 
 // alert(NaN == NaN);//false
@@ -101,142 +101,142 @@ document.write("isFinite(Number.MAX_VALUE + Number.MAX_VALUE) = " + isFinite(Num
 * Number()方法接收任意类型数据
 * parseInt和parseFloat只针对字符串
 * */
-document.write("Number(\"22.34.55\") = " + Number("22.34.55") + "<br>");
-document.write("parseInt(\"22.34.55\") = " + parseInt("22.34.55") + "<br>");
-document.write("parseFloat(\"22.34.55\") = " + parseFloat("22.34.55") + "<br>");
+document.write("Number(\"22.34.55\") = " + Number("22.34.55") + "<br>")
+document.write("parseInt(\"22.34.55\") = " + parseInt("22.34.55") + "<br>")
+document.write("parseFloat(\"22.34.55\") = " + parseFloat("22.34.55") + "<br>")
 // Number("22.34.55") = NaN
 // parseInt("22.34.55") = 22
 // parseFloat("22.34.55") = 22.34
 
-document.write("(typeof (parseInt(\"BLUE\"))) = " + (typeof (parseInt("BLUE"))) + "<br>");//(typeof (parseInt("BLUE"))) = number
+document.write("(typeof (parseInt(\"BLUE\"))) = " + (typeof (parseInt("BLUE"))) + "<br>")//(typeof (parseInt("BLUE"))) = number
 
-var text = "This is the letter sigma:\u03a3";
-document.write("text = " + text + "<br>");
-var lang = "Java";
-lang += "Script";
-document.write("lang = " + lang + "<br>");
+let text = "This is the letter sigma:\u03a3"
+document.write("text = " + text + "<br>")
+let lang = "Java"
+lang += "Script"
+document.write("lang = " + lang + "<br>")
 
-var number = 10;
-document.write("number.toString(2) = " + number.toString(2) + "<br>");//number.toString(2) = 1010
-document.write("number.toString(8) = " + number.toString(8) + "<br>");//number.toString(8) = 12
-document.write("number.toString(10) = " + number.toString(10) + "<br>");//number.toString(10) = 10
-document.write("number.toString(16) = " + number.toString(16) + "<br>");//number.toString(16) = a
-document.write("lost.toString() = " + lost.toString() + "<br>");
-document.write("found.toString() = " + found.toString() + "<br>");
-document.write("Number(\"BLUE\").toString(2) = " + Number("BLUE").toString(2) + "<br>");//Number("BLUE").toString(2) = NaN
+let number = 10
+document.write("number.toString(2) = " + number.toString(2) + "<br>")//number.toString(2) = 1010
+document.write("number.toString(8) = " + number.toString(8) + "<br>")//number.toString(8) = 12
+document.write("number.toString(10) = " + number.toString(10) + "<br>")//number.toString(10) = 10
+document.write("number.toString(16) = " + number.toString(16) + "<br>")//number.toString(16) = a
+document.write("lost.toString() = " + lost.toString() + "<br>")
+document.write("found.toString() = " + found.toString() + "<br>")
+document.write("Number(\"BLUE\").toString(2) = " + Number("BLUE").toString(2) + "<br>")//Number("BLUE").toString(2) = NaN
 
-var obj = {};
-for (var o in obj) {
-    document.write("o = " + o + "<br>");
+let obj = {}
+for (let o in obj) {
+    document.write("o = " + o + "<br>")
 }
-document.write("obj.constructor = " + obj.constructor + "<br>");
-document.write("(typeof obj.constructor) = " + (typeof obj.constructor) + "<br>");
-document.write("obj.toString() = " + obj.toString() + "<br>");
-document.write("obj.valueOf() = " + obj.valueOf() + "<br>");
+document.write("obj.constructor = " + obj.constructor + "<br>")
+document.write("(typeof obj.constructor) = " + (typeof obj.constructor) + "<br>")
+document.write("obj.toString() = " + obj.toString() + "<br>")
+document.write("obj.valueOf() = " + obj.valueOf() + "<br>")
 // obj.constructor = function Object() { [native code] }
 // (typeof obj.constructor) = function
 // obj.toString() = [object Object]
 // obj.valueOf() = [object Object]
 
-document.write("obj.hasOwnProperty(\"constructor\") = " + obj.hasOwnProperty("constructor") + "<br>");//obj.hasOwnProperty("constructor") = false
-document.write("obj.length = " + obj.length + "<br>");//obj.length = undefined
+document.write("obj.hasOwnProperty(\"constructor\") = " + obj.hasOwnProperty("constructor") + "<br>")//obj.hasOwnProperty("constructor") = false
+document.write("obj.length = " + obj.length + "<br>")//obj.length = undefined
 
 
 /*
 * 操作符
 * */
 
-var age = 29;
-document.write("age = " + age + "<br>");//age = 29
-++age;
-document.write("age = " + age + "<br>");//age = 30
-document.write("age = " + --age + "<br>");//age = 29
-document.write("age = " + age++ + "<br>");//age = 29
-document.write("age = " + age + "<br>");//age = 30
+let age = 29
+document.write("age = " + age + "<br>")//age = 29
+++age
+document.write("age = " + age + "<br>")//age = 30
+document.write("age = " + --age + "<br>")//age = 29
+document.write("age = " + age++ + "<br>")//age = 29
+document.write("age = " + age + "<br>")//age = 30
 
-document.write("+\"22\" = " + (+"22") + "<br>");//22
+document.write("+\"22\" = " + (+"22") + "<br>")//22
 
 obj.valueOf = function () {
-    return -1;
-};
+    return -1
+}
 
-document.write("(+obj.valueOf()) = " + (+obj.valueOf()) + "<br>");//(+obj.valueOf()) = -1
+document.write("(+obj.valueOf()) = " + (+obj.valueOf()) + "<br>")//(+obj.valueOf()) = -1
 
-number = 0;
-var neg = ~number;
-document.write("number.toString(2) = " + number.toString(2) + "<br>");//number.toString(2) = 0
-document.write("neg.toString(2) = " + neg.toString(2) + "<br>");//neg.toString(2) = -1
+number = 0
+let neg = ~number
+document.write("number.toString(2) = " + number.toString(2) + "<br>")//number.toString(2) = 0
+document.write("neg.toString(2) = " + neg.toString(2) + "<br>")//neg.toString(2) = -1
 
 
 /*
 * 布尔操作符
 * */
-document.write("!!\"blue\" = " + !!"blue" + "<br>");//!!"blue" = true
-document.write("!!0 = " + !!0 + "<br>");//!!0 = false
-document.write("!!NaN = " + !!NaN + "<br>");//!!NaN = false
-document.write("!!\"\" = " + !!"" + "<br>");//!!"" = false
-document.write("!!null = " + !!null + "<br>");//!!null = false
+document.write("!!\"blue\" = " + !!"blue" + "<br>")//!!"blue" = true
+document.write("!!0 = " + !!0 + "<br>")//!!0 = false
+document.write("!!NaN = " + !!NaN + "<br>")//!!NaN = false
+document.write("!!\"\" = " + !!"" + "<br>")//!!"" = false
+document.write("!!null = " + !!null + "<br>")//!!null = false
 
-var flag = true;
-document.write("(flag || soumeUndefinedVariable) = " + (flag || soumeUndefinedVariable) + "<br>");
+let flag = true
+document.write("(flag || soumeUndefinedVariable) = " + (flag || soumeUndefinedVariable) + "<br>")
 //(flag || soumeUndefinedVariable) = true
-document.write("(!flag && soumeUndefinedVariable) = " + (!flag && soumeUndefinedVariable) + "<br>");
+document.write("(!flag && soumeUndefinedVariable) = " + (!flag && soumeUndefinedVariable) + "<br>")
 //(!flag && soumeUndefinedVariable) = false
 // document.write("(flag && soumeUndefinedVariable) = " + (flag && soumeUndefinedVariable) + "<br>");
 //出错 ReferenceError: Can't find variable: soumeUndefinedVariable
 
-var result1 = ("55" == 55);//true
-var result2 = ("55" === 55);//false
+let result1 = ("55" == 55)//true
+let result2 = ("55" === 55)//false
 
-document.write("(\"brick\" < \"alphabet\") = " + ("brick" < "alphabet") + "<br>");
+document.write("(\"brick\" < \"alphabet\") = " + ("brick" < "alphabet") + "<br>")
 //("brick" < "alphabet") = false
-document.write("(\"brick\" < \"alphabet\".toUpperCase()) = " + ("brick" < "alphabet".toUpperCase()) + "<br>");
+document.write("(\"brick\" < \"alphabet\".toUpperCase()) = " + ("brick" < "alphabet".toUpperCase()) + "<br>")
 //("brick" < "alphabet".toUpperCase()) = false
-document.write("(\"brick\".toUpperCase() < \"alphabet\") = " + ("brick".toUpperCase() < "alphabet") + "<br>");
+document.write("(\"brick\".toUpperCase() < \"alphabet\") = " + ("brick".toUpperCase() < "alphabet") + "<br>")
 //("brick".toUpperCase() < "alphabet") = true 大写字母的编码顺序小于小写字母的编码顺序
 
-document.write("(\"23\" < \"5\") = " + ("23" < "5") + "<br>");//("23" < "5") = true
-document.write("(\"23\" < 5) = " + ("23" < 5) + "<br>");//("23" < 5) = false
+document.write("(\"23\" < \"5\") = " + ("23" < "5") + "<br>")//("23" < "5") = true
+document.write("(\"23\" < 5) = " + ("23" < 5) + "<br>")//("23" < 5) = false
 
-document.write("(\"a\" > 3) = " + ("a" > 3) + "<br>");//("a" > 3) = false
-document.write("(\"a\" <= 3) = " + ("a" <= 3) + "<br>");//("a" <= 3) = false
+document.write("(\"a\" > 3) = " + ("a" > 3) + "<br>")//("a" > 3) = false
+document.write("(\"a\" <= 3) = " + ("a" <= 3) + "<br>")//("a" <= 3) = false
 
-document.write("(NaN > 3) = " + (NaN > 3) + "<br>");//(NaN > 3) = false
-document.write("(NaN <= 3) = " + (NaN <= 3) + "<br>");//(NaN <= 3) = false
+document.write("(NaN > 3) = " + (NaN > 3) + "<br>")//(NaN > 3) = false
+document.write("(NaN <= 3) = " + (NaN <= 3) + "<br>")//(NaN <= 3) = false
 
-document.write("\"55\".valueOf() = " + "55".valueOf() + "<br>");//"55".valueOf() = 55
-document.write("(typeof \"55\".valueOf()) = " + (typeof "55".valueOf()) + "<br>");//(typeof "55".valueOf()) = string
+document.write("\"55\".valueOf() = " + "55".valueOf() + "<br>")//"55".valueOf() = 55
+document.write("(typeof \"55\".valueOf()) = " + (typeof "55".valueOf()) + "<br>")//(typeof "55".valueOf()) = string
 
-var random = Math.random();
+let random = Math.random()
 if (random < 0.5) {
-    document.write("random = " + random + "<br>");
+    document.write("random = " + random + "<br>")
 } else {
-    document.write("random is bigger than 0.5 " + random + "<br>");
+    document.write("random is bigger than 0.5 " + random + "<br>")
 }
 
 if ((random < 1 / 3)) {
-    document.write("random < 1/3    " + random + "<br>");
+    document.write("random < 1/3    " + random + "<br>")
 } else if (random < 2 / 3) {
-    document.write("random < 2/3    " + random + "<br>");
+    document.write("random < 2/3    " + random + "<br>")
 } else {
-    document.write("random < 1    " + random + "<br>");
+    document.write("random < 1    " + random + "<br>")
 }
 
 do {
-    random = Math.random();
-    document.write("random = " + random + "<br>");
-} while (random < 0.9);
+    random = Math.random()
+    document.write("random = " + random + "<br>")
+} while (random < 0.9)
 // random = 0.2227480145173082
 // random = 0.7655779239942558
 // random = 0.1681325775435013
 // random = 0.8043733490993711
 // random = 0.985614423707166
 
-document.write("====================== " + "<br>");
+document.write("====================== " + "<br>")
 
 while (random > 0.1) {
-    random = Math.random();
-    document.write("random = " + random + "<br>");
+    random = Math.random()
+    document.write("random = " + random + "<br>")
 }
 // random = 0.5959901135191241
 // random = 0.39366977257978375
@@ -249,20 +249,20 @@ while (random > 0.1) {
 // random = 0.16163002659793668
 // random = 0.043993298049713525
 
-outloop:for (var i = 0; i < 10; i++) {
-    for (var j = 0; j < 10; j++) {
-        if (i === 5 && j === 5) continue outloop;
-        document.write("i = " + i + j + "<br>");
+outloop:for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+        if (i === 5 && j === 5) continue outloop
+        document.write("i = " + i + j + "<br>")
     }
 }
 
-var list = document.getElementsByTagName("*");
-for (var i = 0; i < list.length; i++) {
-    var element = list[i];
-    var content;
+let list = document.getElementsByTagName("*")
+for (let i = 0; i < list.length; i++) {
+    let element = list[i]
+    let content
     with (element) {
         if (nodeName != "BR") {
-            document.write("nodeName:" + nodeName + " nodeType:" + nodeType + "\r\n");
+            document.write("nodeName:" + nodeName + " nodeType:" + nodeType + "\r\n")
         }
     }
 }
@@ -287,39 +287,40 @@ for (var i = 0; i < list.length; i++) {
 //         alert("more than 20");
 // }
 
-// for (var property in window) {
+// for (let property in window) {
 //     document.write("property = " + property + " ---- " + (typeof property) + "<br>");
 // }
 
 function sayHi(name, message) {
     // document.write("Hello, " + name + ", " + message + "<br>");
-    document.write("Hello, " + arguments[0] + ", " + arguments[1] + "<br>");
+    document.write("Hello, " + arguments[0] + ", " + arguments[1] + "<br>")
 }
 
-sayHi("Nicholas","how are you today?");//Hello, Nicholas, how are you today?
+sayHi("Nicholas", "how are you today?")//Hello, Nicholas, how are you today?
 
 function diff(num1, num2) {
-    return num1 > num2 ? num1 - num2 : num2 - num1;
+    return num1 > num2 ? num1 - num2 : num2 - num1
 }
 
-document.write("diff(12,23) = " + diff(12, 23) + "<br>");
-document.write("diff(23,12) = " + diff(23, 12) + "<br>");
-document.write("diff(12,12) = " + diff(12, 12) + "<br>");
+document.write("diff(12,23) = " + diff(12, 23) + "<br>")
+document.write("diff(23,12) = " + diff(23, 12) + "<br>")
+document.write("diff(12,12) = " + diff(12, 12) + "<br>")
 // diff(12,23) = 11
 // diff(23,12) = 11
 // diff(12,12) = 0
 
 function testArguments() {
-    for (var i = 0; i < arguments.length; i++) {
-        document.write("arguments[" + i + "] = " + arguments[i].toString() + "<br>");
+    for (let i = 0; i < arguments.length; i++) {
+        document.write("arguments[" + i + "] = " + arguments[i].toString() + "<br>")
     }
 }
-testArguments(1, "2", true, false, 3.1415926, typeof testArguments, testArguments);
+
+testArguments(1, "2", true, false, 3.1415926, typeof testArguments, testArguments)
 // arguments[0] = 1
 // arguments[1] = 2
 // arguments[2] = true
 // arguments[3] = false
 // arguments[4] = 3.1415926
 // arguments[5] = function
-// arguments[6] = function testArguments() { for (var i = 0; i < arguments.length; i++) { document.write("arguments[" + i + "] = " + arguments[i].toString() + "
+// arguments[6] = function testArguments() { for (let i = 0; i < arguments.length; i++) { document.write("arguments[" + i + "] = " + arguments[i].toString() + "
 // "); } }

@@ -1,54 +1,58 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="ca">
 <head>
     <title>Title</title>
 </head>
 <body>
 <script type="text/javascript" src="objects.js"></script>
-<script>
+<script type="text/javascript">
     function object(o) {
         function F() {
 
         }
-        F.prototype = o;
-        return new F();
+
+        F.prototype = o
+        return new F()
     }
+
     function Super(name) {
-        this.name = name;
-        this.friends = ['Baron','Alex']
+        this.name = name
+        this.friends = ['Baron', 'Alex']
     }
+
     Super.prototype.sayName = function () {
-        document.write("this.name = " + this.name + "<br>");
-    };
+        document.write("this.name = " + this.name + "<br>")
+    }
 
     function Sub(name, age) {
-        Super.call(this,name);
-        this.age = age;
+        Super.call(this, name)
+        this.age = age
     }
+
     function inheritPrototype(subType, superType) {
-        document.write("superType.prototype.constructor = " + superType.prototype.constructor + "<br>");
-        var subType1 = object(superType.prototype);
-        subType1.constructor = subType;
-        subType.prototype = subType1;
+        document.write("superType.prototype.constructor = " + superType.prototype.constructor + "<br>")
+        let subType1 = object(superType.prototype)
+        subType1.constructor = subType
+        subType.prototype = subType1
 
         // subType.prototype = superType.prototype;
     }
 
-    inheritPrototype(Sub,Super);
+    inheritPrototype(Sub, Super)
 
-    var allen = new Sub("Allen",22);
-    var frank = new Sub("Frank",24);
-    document.write("allen = " + allen + "<br>");
-    document.write("frank = " + frank + "<br>");
-    frank.friends.push("Cinderella");
-    document.write("allen = " + allen + "<br>");
-    document.write("frank = " + frank + "<br>");
+    let allen = new Sub("Allen", 22)
+    let frank = new Sub("Frank", 24)
+    document.write("allen = " + allen + "<br>")
+    document.write("frank = " + frank + "<br>")
+    frank.friends.push("Cinderella")
+    document.write("allen = " + allen + "<br>")
+    document.write("frank = " + frank + "<br>")
 
-    document.write("(frank instanceof Super) = " + (frank instanceof Super) + "<br>");//原型继承链断裂
+    document.write("(frank instanceof Super) = " + (frank instanceof Super) + "<br>")//原型继承链断裂
     //(frank instanceof Super) = false
-    document.write("(frank instanceof Sub) = " + (frank instanceof Sub) + "<br>");
-    frank.sayName();
+    document.write("(frank instanceof Sub) = " + (frank instanceof Sub) + "<br>")
+    frank.sayName()
 </script>
 </body>
 </html>

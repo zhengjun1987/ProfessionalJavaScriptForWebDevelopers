@@ -11,35 +11,36 @@
         function F() {
 
         }
-        F.prototype = o;
-        return new F();
+
+        F.prototype = o
+        return new F()
     }
 
-    var person = {
-        name:"Bob",
-        friends:['Shelby',"Van"]
-    };
+    let person = {
+        name: "Bob",
+        friends: ['Shelby', "Van"]
+    }
 
-    var another = object(person);
-    another.name = "Greg";
-    var third = object(person);
-    third.name = "Alex";
+    let another = object(person)
+    another.name = "Greg"
+    let third = object(person)
+    third.name = "Alex"
 
-    document.write("another = " + another + "<br>");//another = [name] = Greg, [friends] = Shelby,Van
-    person.friends.pop();
+    document.write("another = " + another + "<br>")//another = [name] = Greg, [friends] = Shelby,Van
+    person.friends.pop()
 
-    document.write("another = " + another + "<br>");//another = [name] = Greg, [friends] = Shelby
-    document.write("third = " + third + "<br>");//third = [name] = Alex, [friends] = Shelby
+    document.write("another = " + another + "<br>")//another = [name] = Greg, [friends] = Shelby
+    document.write("third = " + third + "<br>")//third = [name] = Alex, [friends] = Shelby
 
-    var person1 = Object.create(person);
-    person1.name = "Linda";
-    person1.friends.push("Alex");
-    document.write("person1 = " + person1 + "<br>");//person1 = [name] = Linda, [friends] = Shelby,Alex
+    let person1 = Object.create(person)
+    person1.name = "Linda"
+    person1.friends.push("Alex")
+    document.write("person1 = " + person1 + "<br>")//person1 = [name] = Linda, [friends] = Shelby,Alex
 
-    var person2 = Object.create(person);
-    person2.name = "Baron";
-    person2.friends.push("Simba");
-    document.write("person2 = " + person2 + "<br>");//person2 = [name] = Baron, [friends] = Shelby,Alex,Simba
+    let person2 = Object.create(person)
+    person2.name = "Baron"
+    person2.friends.push("Simba")
+    document.write("person2 = " + person2 + "<br>")//person2 = [name] = Baron, [friends] = Shelby,Alex,Simba
 
 </script>
 </body>

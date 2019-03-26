@@ -27,7 +27,7 @@
         document.write("arguments.callee.name = " + arguments.callee.name + "<br>");
     }
 
-    var people = new People();
+    let people = new People();
 
     People.prototype.name = "Nicholas";
     People.prototype.age = 29;
@@ -44,7 +44,7 @@
 
     // people.sayName();//Nicholas
 
-    var people1 = new People();
+    let people1 = new People();
     // people1.sayName();//Nicholas
 
     /*
@@ -174,7 +174,7 @@
         sayName: sayName
     };
 
-    var friend = new PersonNeo();
+    let friend = new PersonNeo();
     document.write("(friend instanceof Object) = " + (friend instanceof Object) + "<br>");
     document.write("friend instanceof PersonNeo = " + (friend instanceof PersonNeo) + "<br>");
     document.write("(friend.constructor === PersonNeo) = " + (friend.constructor === PersonNeo) + "<br>");
@@ -209,7 +209,7 @@
     // toLowerCase,toUpperCase,localeCompare,toLocaleLowerCase,toLocaleUpperCase,trim,startsWith,endsWith,includes,normalize,
     // trimStart,trimLeft,trimEnd,trimRight,constructor,startWith
 
-    var o = 2;
+    let o = 2;
     document.write("Object.getOwnPropertyNames(Number.prototype) = " + Object.getOwnPropertyNames(o.__proto__) + "<br>");
     //  toLocaleString,valueOf,toFixed,toExponential,toPrecision,toString,constructor
 
@@ -217,7 +217,7 @@
     // length,toString,values,toLocaleString,concat,fill,join,pop,push,reverse,shift,slice,sort,splice,unshift,every,forEach,
     // some,indexOf,lastIndexOf,filter,flat,flatMap,reduce,reduceRight,map,entries,keys,find,findIndex,includes,copyWithin,constructor
 
-    var it = {};
+    let it = {};
     document.write("Object.getOwnPropertyNames(it.__proto__) = " + Object.getOwnPropertyNames(it.__proto__) + "<br>");
     // toString,toLocaleString,valueOf,hasOwnProperty,propertyIsEnumerable,isPrototypeOf,
     // __defineGetter__,__defineSetter__,__lookupGetter__,__lookupSetter__,__proto__,
@@ -228,7 +228,7 @@
     *   1.没有初始化参数的规范
     *   2.所有的实例对象共享属性，对于 包含引用类型的属性值 某个更改则所有实例对象全被更改
     * */
-    var collegan = new PersonNeo();
+    let collegan = new PersonNeo();
     collegan.friends.push("Enemy");
     document.write("friend.friends = " + friend.friends + "<br>");//friend.friends = Jason,Marty,Enemy
 </script>

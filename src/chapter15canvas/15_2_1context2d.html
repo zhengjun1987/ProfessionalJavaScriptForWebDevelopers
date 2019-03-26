@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用Canvas绘图</title>
+</head>
+<body>
+<canvas id="drawing" width="200" height="200">A drawing of something.</canvas>
+</body>
+<script type="text/javascript">
+    let drawing = document.getElementById("drawing")
+    if (drawing.getContext) {
+        let context = drawing.getContext("2d")
+        // context.strokeStyle = "red"
+        // context.fillStyle = "rgba(255,0,0,0.5)"
+        // context.fillRect(10,10,50,50)
+        // context.fillStyle = "rgba(0,0,255,0.5)"
+        // context.fillRect(30,30,50,50)
+        //
+        // context.strokeStyle = "#f00"
+        // context.strokeRect(110,110,50,50)
+        // context.strokeStyle = "rgba(0,0,255,0.5)"
+        // context.strokeRect(130,130,50,50)
+        // context.strokeStyle = "#000"
+        // context.strokeRect(0,0,200,200)
+        context.beginPath()
+        context.arc(100, 100, 99, 0, Math.PI * 2, false)
+        context.moveTo(194, 100)
+        context.arc(100, 100, 94, 0, Math.PI * 2, false)
+        context.moveTo(100, 100)
+        context.lineTo(100, 15)
+        context.moveTo(100, 100)
+        context.lineTo(35, 100)
+        console.log("====== context.isPointInPath(100, 16) = ", context.isPointInPath(100, 16))
+        console.log("====== context.isPointInPath(30,100) = ", context.isPointInPath(30, 100))
+        console.log("====== context.isPointInPath(110,110) = ", context.isPointInPath(110, 110))
+        console.log("====== context.isPointInPath(199,199) = ", context.isPointInPath(199, 199))
+        context.stroke()
+        context.font = "bold 14px Arial"
+        context.textAlign = "center"
+        context.textBaseline = "bottom"
+        context.fillText("12", 100, 20)
+        // context.textAlign = "start"
+        // context.fillText("12", 100, 40)
+        // context.textAlign = "end"
+        // context.fillText("12", 100, 60)
+        let fontSize = 100
+        context.font = fontSize + "px Arial"
+        while (context.measureText("Hello world!").width > 140) {
+            fontSize--
+            context.font = fontSize + "px Arial"
+        }
+        context.fillText("Hello world!", 100, 130)
+        console.log("====== fontSize = ", fontSize)
+        console.log("====== -26 = ", -26)
+        var dataURL = drawing.toDataURL("image/png")
+        var image = document.createElement("image")
+        image.src = dataURL
+        document.body.appendChild(image)
+    }
+</script>
+</html>

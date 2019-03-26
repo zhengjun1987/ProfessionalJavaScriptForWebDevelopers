@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Composition</title>
+</head>
+<body>
+<canvas id="drawing" width="360" height="360">A drawing of something.</canvas>
+<script type="application/ecmascript">
+    var drawing = document.getElementById("drawing")
+    var context = drawing.getContext("2d")
+    // context.fillStyle = "#ff0000"
+    // context.fillRect(10,10,50,50)
+    // context.globalAlpha = 0.5
+    // context.fillStyle = "rgba(0,0,255,1)"
+    // context.fillRect(30,30,50,50)
+    // context.globalAlpha = 0
+
+
+    context.fillStyle = "#ff0000"
+    context.fillRect(10,10,50,50)
+    // context.globalCompositeOperation = "source-over"
+    // context.globalCompositeOperation = "source-in"
+    // context.globalCompositeOperation = "source-out"
+    // context.globalCompositeOperation = "source-atop"
+    // context.globalCompositeOperation = "destination-over"
+    // context.globalCompositeOperation = "destination-in"
+    // context.globalCompositeOperation = "destination-out"
+    // context.globalCompositeOperation = "destination-atop"
+    context.globalCompositeOperation = "lighter"
+    // context.globalCompositeOperation = "copy"
+    // context.globalCompositeOperation = "xor"
+    context.fillStyle = "rgba(0,0,255,1)"
+    // context.fillRect(30,30,50,50)
+
+    // Set line width
+    context.lineWidth = 10;
+
+    // Wall
+    context.strokeRect(75, 140, 150, 110);
+
+    // Door
+    context.fillRect(130, 190, 40, 60);
+
+    // Roof
+    context.beginPath();
+    context.moveTo(50, 140);
+    context.lineTo(150, 60);
+    context.lineTo(250, 140);
+    context.closePath();
+    context.stroke();
+</script>
+</body>
+</html>

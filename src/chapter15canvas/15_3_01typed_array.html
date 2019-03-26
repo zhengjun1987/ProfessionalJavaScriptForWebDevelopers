@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类型化数组</title>
+</head>
+<body>
+<script type="text/javascript">
+    var buffer = new ArrayBuffer(20)
+    var view = new DataView(buffer)
+    view.setUint16(0, 25)
+    view.setUint16(2, 50)
+    console.log("====== view.getInt16(0) = ", view.getInt16(0))
+    console.log("====== view.getUint16(1) = ", view.getUint16(1))
+    console.log("====== view.getUint16(2) = ", view.getUint16(2))
+    console.log("====== view.getUint16(3) = ", view.getUint16(3))
+    console.log("====== view = ", view)
+    console.log("====== buffer = ", buffer)
+
+    console.log("====== view.byteOffset = ", view.byteOffset)
+    console.log("====== view.byteLength = ", view.byteLength)
+    var int16Array = new Uint16Array(buffer)
+    console.log("====== Uint16Array.BYTES_PER_ELEMENT = ", Uint16Array.BYTES_PER_ELEMENT)
+    // int16Array[0] = 25
+    console.log("====== int16Array.byteOffset = ", int16Array.byteOffset)
+    console.log("====== int16Array.byteLength = ", int16Array.byteLength)
+    int16Array.every((value, index, array) => {
+        console.log("====== value = ", value)
+        console.log("====== index = ", index)
+        console.log("====== array = ", array)
+    })
+    console.log("====== buffer = ", buffer)
+
+    var int8Array = new Int8Array([10,20,30,40,50])
+    console.log("====== int8Array.byteLength = " + int8Array.byteLength)
+</script>
+</body>
+</html>

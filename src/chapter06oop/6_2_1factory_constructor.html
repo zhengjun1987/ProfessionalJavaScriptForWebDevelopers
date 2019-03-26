@@ -8,7 +8,7 @@
 <script>
     function sayAnObject(object) {
         document.write("=========================" + "<br>");
-        for (var key in object) {
+        for (let key in object) {
             document.write("[" + key + "] = " + object[key] + ", ");
         }
         document.write("<br>=========================" + "<br>");
@@ -16,15 +16,15 @@
 
     //    工厂模式:如何减少批量创建对象的字面量重复代码 —— 没有解决对象识别的问题：即如何确定一个对象的类型
     function createPerson(name, age, job) {
-        var object = new Object();
+        let object = new Object();
         object.name = name;
         object.age = age;
         object.job = job;
         return object;
     }
 
-    var person1 = createPerson("Nicholas", 29, "Software Engineer");
-    var person2 = createPerson("Greg", 27, "Doctor");
+    let person1 = createPerson("Nicholas", 29, "Software Engineer");
+    let person2 = createPerson("Greg", 27, "Doctor");
 
     //    构造函数模式：如何识别对象的类型
     //    构造模式的问题：每个方法都要在每个实例上重新创建一遍
@@ -55,8 +55,8 @@
         alert(this.name);
     }
 
-    var nicholas = new Person("Nicholas", 29, "Software Engineer");//不使用new 引用构造方法（没有return语句的方法）的话会产生返回值为undefined的错误
-    var greg = new Person("Greg", 27, "Doctor");
+    let nicholas = new Person("Nicholas", 29, "Software Engineer");//不使用new 引用构造方法（没有return语句的方法）的话会产生返回值为undefined的错误
+    let greg = new Person("Greg", 27, "Doctor");
 
     document.write("(person2 instanceof Person) = " + (person2 instanceof Person) + "<br>");//(person2 instanceof Person) = false
     document.write("(nicholas instanceof Person) = " + (nicholas instanceof Person) + "<br>");//(nicholas instanceof Person) = true
@@ -84,7 +84,7 @@
     document.write("(typeof Person) = " + (typeof Person) + "<br>");//(typeof Person) = function
 
     //构造器的另外一种使用方法
-    var object = new Object();
+    let object = new Object();
     Person.call(object, "Malt", 33, "Whisky");
     document.write("(object.constructor === Person) = " + (object.constructor === Person) + "<br>");//false
     document.write("(object instanceof Person) = " + (object instanceof Person) + "<br>");//false
@@ -92,7 +92,7 @@
     object.sayName();
 
 
-    var nature = 42;
+    let nature = 42;
     document.write("nature.constructor = " + nature.constructor + "<br>");//nature.constructor = function Number() { [native code] }
     document.write("(nature.constructor === Number) = " + (nature.constructor === Number) + "<br>");
     document.write("(nature.__proto__) = " + (nature.__proto__) + "<br>");

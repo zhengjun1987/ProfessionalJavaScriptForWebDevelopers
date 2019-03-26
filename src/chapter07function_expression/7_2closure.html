@@ -11,21 +11,21 @@
     * 闭包的概念：有权访问另外一个函数中作用域中变量的函数
     * */
     function creatFunctions() {
-        var arr = [];
+        let arr = []
         /*
         * 这里的i实际上是一个全局变量，导致所引用的返回值指向了同一个变量i
         * */
-        for (var i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; i++) {
             arr[i] = function () {
-                return i;
+                return i
             }
         }
-        return arr;
+        return arr
     }
 
-    var arr = creatFunctions();
-    for (var i = 0; i < arr.length; i++) {
-        document.write("arr[i] = " + arr[i]() + "<br>");
+    let arr = creatFunctions()
+    for (let i = 0; i < arr.length; i++) {
+        document.write("arr[i] = " + arr[i]() + "<br>")
     }
     // arr[i] = 10
     // arr[i] = 10
@@ -39,20 +39,20 @@
     // arr[i] = 10
 
     function creatFunctions2() {
-        var arr = [];
-        for (var i = 0; i < 10; i++) {
+        let arr = []
+        for (let i = 0; i < 10; i++) {
             arr[i] = (function (num) {
                 return function () {
-                    return num;
-                };
-            })(i);
+                    return num
+                }
+            })(i)
         }
-        return arr;
+        return arr
     }
 
-    arr = creatFunctions2();
-    for (var i = 0; i < arr.length; i++) {
-        document.write("arr[i] = " + arr[i]() + "<br>");
+    arr = creatFunctions2()
+    for (let i = 0; i < arr.length; i++) {
+        document.write("arr[i] = " + arr[i]() + "<br>")
     }
     // arr[i] = 0
     // arr[i] = 1
@@ -65,35 +65,36 @@
     // arr[i] = 8
     // arr[i] = 9
 
-    var name = "The Window";
-    var object = {
-        name : "My Object",
+    let name = "The Window"
+    let object = {
+        name: "My Object",
         getNameFunc: function () {
             return function () {
-                return this.name;
+                return this.name
             }
         }
-    };
-    document.write("object.getNameFunc()() = " + object.getNameFunc()() + "<br>");//object.getNameFunc()() = The Window
+    }
+    document.write("object.getNameFunc()() = " + object.getNameFunc()() + "<br>")//object.getNameFunc()() = The Window
 
-    var another = {
-        name:"My Object",
-        getName:function () {
-            return this.name;
+    let another = {
+        name: "My Object",
+        getName: function () {
+            return this.name
         }
-    };
-    document.write("another.getName() = " + another.getName() + "<br>");//another.getName() = My Object
-    document.write("((another.getName)()) = " + ((another.getName)()) + "<br>");//((another.getName)()) = My Object
-    document.write("(another.getName = another.getName)() = " + (another.getName = another.getName)() + "<br>");
+    }
+    document.write("another.getName() = " + another.getName() + "<br>")//another.getName() = My Object
+    document.write("((another.getName)()) = " + ((another.getName)()) + "<br>")//((another.getName)()) = My Object
+    document.write("(another.getName = another.getName)() = " + (another.getName = another.getName)() + "<br>")
+
     //(another.getName = another.getName)() = The Window
 
     function assignHandler() {
-        var element = document.getElementById("elementName");
-        var id = element.id;
+        let element = document.getElementById("elementName")
+        let id = element.id
         element.onclick = function (ev) {
-            alert(id);
-        };
-        element = null;
+            alert(id)
+        }
+        element = null
     }
 </script>
 </body>

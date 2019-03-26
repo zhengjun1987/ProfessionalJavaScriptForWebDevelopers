@@ -14,44 +14,45 @@
     *   2.子类构造函数原型指定调用一次：加入父类原型链的末端（无参调用）
     * */
     function Super(name) {
-        this.name = name;
-        this.colors = ['red','green','blue'];
+        this.name = name
+        this.colors = ['red', 'green', 'blue']
         // this.sayName = function () {
         //     alert(this.name);
         // }
     }
-    Super.prototype.sayName = function () {
-        document.write("this.name = " + this.name + "<br>");
-    };
 
-    function Sub(name,age) {
-        Super.call(this,name);
-        this.age = age;
+    Super.prototype.sayName = function () {
+        document.write("this.name = " + this.name + "<br>")
     }
 
-    // var sub = new Sub("Zheng Jun",32);
+    function Sub(name, age) {
+        Super.call(this, name)
+        this.age = age
+    }
+
+    // let sub = new Sub("Zheng Jun",32);
     // sub.sayName();//Zheng Jun
     //借用构造器的方法可以直接继承父类自定义的函数，而无法继承父类原型中的函数
     //此时子类原型指向的是Object
-    document.write("(Sub.prototype instanceof Object) = " + (Sub.prototype instanceof Object) + "<br>");
-    document.write("(Sub.prototype instanceof Super) = " + (Sub.prototype instanceof Super) + "<br>");
+    document.write("(Sub.prototype instanceof Object) = " + (Sub.prototype instanceof Object) + "<br>")
+    document.write("(Sub.prototype instanceof Super) = " + (Sub.prototype instanceof Super) + "<br>")
     // (Sub.prototype instanceof Object) = true
     // (Sub.prototype instanceof Super) = false
 
     //现在将原型指向父类,两种写法：
-    Sub.prototype = new Super();
-    Sub.prototype.constructor = Sub;
+    Sub.prototype = new Super()
+    Sub.prototype.constructor = Sub
     // Sub.prototype = Super.prototype;
     Sub.prototype.sayAge = function () {
-        document.write("this.age = " + this.age + "<br>");
-    };
+        document.write("this.age = " + this.age + "<br>")
+    }
 
-    var sub = new Sub("Zheng Jun",32);
-    document.write("sub.toString() = " + sub.toString() + "<br>");
-    sub.sayName();//Super.prototype.sayName Zheng Jun
-    document.write("(sub instanceof Sub) = " + (sub instanceof Sub) + "<br>");
-    document.write("(sub instanceof Super) = " + (sub instanceof Super) + "<br>");
-    document.write("(sub instanceof Object) = " + (sub instanceof Object) + "<br>");
+    let sub = new Sub("Zheng Jun", 32)
+    document.write("sub.toString() = " + sub.toString() + "<br>")
+    sub.sayName()//Super.prototype.sayName Zheng Jun
+    document.write("(sub instanceof Sub) = " + (sub instanceof Sub) + "<br>")
+    document.write("(sub instanceof Super) = " + (sub instanceof Super) + "<br>")
+    document.write("(sub instanceof Object) = " + (sub instanceof Object) + "<br>")
     // (sub instanceof Sub) = true
     // (sub instanceof Super) = true
     // (sub instanceof Object) = true
@@ -59,21 +60,21 @@
     /*
     * typeof 操作符与原型链无关
     * */
-    document.write("(typeof sub) = " + (typeof sub) + "<br>");//(typeof sub) = object
+    document.write("(typeof sub) = " + (typeof sub) + "<br>")//(typeof sub) = object
 
-    sub.colors.push("black");
-    var sub1 = new Sub("Anonymous",23);
-    document.write("sub.colors = " + sub.colors + "<br>");
-    document.write("sub1.colors = " + sub1.colors + "<br>");
+    sub.colors.push("black")
+    let sub1 = new Sub("Anonymous", 23)
+    document.write("sub.colors = " + sub.colors + "<br>")
+    document.write("sub1.colors = " + sub1.colors + "<br>")
     // sub.colors = red,green,blue,black
     // sub1.colors = red,green,blue
 
-    document.write("(Super.prototype.isPrototypeOf(sub)) = " + (Super.prototype.isPrototypeOf(sub)) + "<br>");//true
-    document.write("(Sub.prototype.isPrototypeOf(sub)) = " + (Sub.prototype.isPrototypeOf(sub)) + "<br>");//true
-    sub.sayAge();//this.age = 32
+    document.write("(Super.prototype.isPrototypeOf(sub)) = " + (Super.prototype.isPrototypeOf(sub)) + "<br>")//true
+    document.write("(Sub.prototype.isPrototypeOf(sub)) = " + (Sub.prototype.isPrototypeOf(sub)) + "<br>")//true
+    sub.sayAge()//this.age = 32
 
-    var super1 = new Super("");
-    document.write("super1.sayAge = " + super1.sayAge + "<br>");//super1.sayAge = undefined
+    let super1 = new Super("")
+    document.write("super1.sayAge = " + super1.sayAge + "<br>")//super1.sayAge = undefined
     // super1.sayAge();
 
 

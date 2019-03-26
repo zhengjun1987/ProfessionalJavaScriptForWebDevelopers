@@ -7,7 +7,7 @@
 <body>
 <script>
     "use strict";
-    var person1 = {};
+    let person1 = {};
     person1.name = "Nicholas";
     person1.age = 29;
     person1.job = "Software Engineer";
@@ -15,7 +15,7 @@
         document.write("this.name = " + this.name + "<br>");
     };
 
-    var person2 = {
+    let person2 = {
         name: "Nicholas",
         age: 29,
         job: "Software Engineer",
@@ -35,7 +35,7 @@
 
     function sayAnObject(object) {
         document.write("=========================" + "<br>");
-        for (var key in object) {
+        for (let key in object) {
             document.write("[" + key + "] = " + object[key] + ", ");
         }
         document.write("<br>=========================" + "<br>");
@@ -132,12 +132,12 @@
     * 所以访问器属性没有writable特征
     * 通过这个访问器属性，可以在完全隐藏数据属性的基础之上进一步控制数据属性的访问和设定！
     * */
-    var book = {
+    let book = {
         _year: 2004,
         edition: 1
     };
     //Object  --- Provides functionality common to all JavaScript objects.
-    var defineProperty = Object.defineProperty(book, "year", {
+    let defineProperty = Object.defineProperty(book, "year", {
         enumerable: true,//增加此属性之后在for循环中可以看到该属性了
         get: function () {
             return this._year;
@@ -154,7 +154,7 @@
     book.year = 2005;
     document.write("book.edition = " + book.edition + "<br>");//book.edition = 2
 
-    var newbook = {};
+    let newbook = {};
     Object.defineProperties(newbook, {
         _year: {
             enumerable: false,
@@ -182,7 +182,7 @@
             }
         }
     });
-    var propertyDescriptor = Object.getOwnPropertyDescriptor(newbook, "_year");
+    let propertyDescriptor = Object.getOwnPropertyDescriptor(newbook, "_year");
     sayAnObject(propertyDescriptor);
     document.write("propertyDescriptor.configurable = " + propertyDescriptor.configurable + "<br>");
     document.write("propertyDescriptor.value = " + propertyDescriptor.value + "<br>");
@@ -194,7 +194,7 @@
     // propertyDescriptor.writable = false
     document.write("(typeof propertyDescriptor.get) = " + (typeof propertyDescriptor.get) + "<br>");//undefined
 
-    var descriptor = Object.getOwnPropertyDescriptor(newbook, "year");
+    let descriptor = Object.getOwnPropertyDescriptor(newbook, "year");
     sayAnObject(descriptor);
 
     sayAnObject(newbook);//[edition] = 1, [year] = 2004

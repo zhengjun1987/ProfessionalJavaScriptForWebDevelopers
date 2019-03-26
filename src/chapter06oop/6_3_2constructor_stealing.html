@@ -8,43 +8,43 @@
 <script type="text/javascript" src="objects.js"></script>
 <script>
     function Super() {
-        this.colors = ['red', 'green', 'blue'];
+        this.colors = ['red', 'green', 'blue']
     }
 
     function Sub() {
-        Super.call(this);
+        Super.call(this)
     }
 
-    var sub = new Sub();
+    let sub = new Sub()
 
-    document.write("(sub instanceof Super) = " + (sub instanceof Super) + "<br>");//(sub instanceof Super) = false
-    document.write("sub.constructor = " + sub.constructor + "<br>");//sub.constructor = function Sub() { Super.call(this); }
-    document.write("sub.toString() = " + sub.toString() + "<br>");//sub.toString() = Sub{[colors] = red,green,blue}
+    document.write("(sub instanceof Super) = " + (sub instanceof Super) + "<br>")//(sub instanceof Super) = false
+    document.write("sub.constructor = " + sub.constructor + "<br>")//sub.constructor = function Sub() { Super.call(this); }
+    document.write("sub.toString() = " + sub.toString() + "<br>")//sub.toString() = Sub{[colors] = red,green,blue}
 
-    sub.colors.push("black");
-    document.write("sub.colors = " + sub.colors + "<br>");
+    sub.colors.push("black")
+    document.write("sub.colors = " + sub.colors + "<br>")
     // sub.colors = red,green,blue,black
-    var another = new Sub();
-    document.write("another.colors = " + another.colors + "<br>");
+    let another = new Sub()
+    document.write("another.colors = " + another.colors + "<br>")
     // another.colors = red,green,blue
 
 
     //带有参数的构造函数借用
     function SuperType(name) {
-        this.name = name;
+        this.name = name
     }
 
     function SubType(name, age, job) {
-        SuperType.apply(this, [name]);
-        this.age = age;
-        this.job = job;
+        SuperType.apply(this, [name])
+        this.age = age
+        this.job = job
     }
 
-    var subType = new SubType("Nova", 32, "Engineer");
-    document.write("subType = " + subType + "<br>");//subType = [name] = Nova, [age] = 32, [job] = Engineer
-    document.write("(subType instanceof SubType) = " + (subType instanceof SubType) + "<br>");
-    document.write("(subType instanceof SuperType) = " + (subType instanceof SuperType) + "<br>");
-    document.write("(subType instanceof Object) = " + (subType instanceof Object) + "<br>");
+    let subType = new SubType("Nova", 32, "Engineer")
+    document.write("subType = " + subType + "<br>")//subType = [name] = Nova, [age] = 32, [job] = Engineer
+    document.write("(subType instanceof SubType) = " + (subType instanceof SubType) + "<br>")
+    document.write("(subType instanceof SuperType) = " + (subType instanceof SuperType) + "<br>")
+    document.write("(subType instanceof Object) = " + (subType instanceof Object) + "<br>")
     // (subType instanceof SubType) = true
     // (subType instanceof SuperType) = false 继承链断裂
     // (subType instanceof Object) = true

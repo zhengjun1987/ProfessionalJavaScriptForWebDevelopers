@@ -7,24 +7,24 @@
 <body>
 <script type="text/javascript">
 
-    window.moveTo(600,600);
-    document.write("window.screenLeft = " + window.screenLeft + "<br>");
-    document.write("window.screenX = " + window.screenX + "<br>");
-    document.write("window.screenTop = " + window.screenTop + "<br>");
-    document.write("window.screenY = " + window.screenY + "<br>");
-    var leftPos = (typeof window.screenLeft === "number")?window.screenLeft:window.screenX;
-    var topPos = (typeof window.screenTop === "number")?window.screenTop:window.screenY;
+    window.moveTo(600, 600)
+    document.write("window.screenLeft = " + window.screenLeft + "<br>")
+    document.write("window.screenX = " + window.screenX + "<br>")
+    document.write("window.screenTop = " + window.screenTop + "<br>")
+    document.write("window.screenY = " + window.screenY + "<br>")
+    let leftPos = (typeof window.screenLeft === "number") ? window.screenLeft : window.screenX
+    let topPos = (typeof window.screenTop === "number") ? window.screenTop : window.screenY
 
     // alert(leftPos);
 
-    document.write("window.innerWidth = " + window.innerWidth + "<br>");//window.innerWidth = 1280
-    document.write("window.innerHeight = " + window.innerHeight + "<br>");//window.innerHeight = 712
+    document.write("window.innerWidth = " + window.innerWidth + "<br>")//window.innerWidth = 1280
+    document.write("window.innerHeight = " + window.innerHeight + "<br>")//window.innerHeight = 712
 
-    document.write("document.documentElement.clientWidth = " + document.documentElement.clientWidth + "<br>");
-    document.write("document.documentElement.clientHeight = " + document.documentElement.clientHeight + "<br>");
+    document.write("document.documentElement.clientWidth = " + document.documentElement.clientWidth + "<br>")
+    document.write("document.documentElement.clientHeight = " + document.documentElement.clientHeight + "<br>")
 
-    document.write("document.body.clientHeight = " + document.body.clientHeight + "<br>");
-    document.write("document.body.clientWidth = " + document.body.clientWidth + "<br>");
+    document.write("document.body.clientHeight = " + document.body.clientHeight + "<br>")
+    document.write("document.body.clientWidth = " + document.body.clientWidth + "<br>")
 
     // window.screenLeft = 0
     // window.screenX = 0
@@ -40,17 +40,17 @@
     // window.resizeTo(300,300);
 
     // window.open("https://www.baidu.com","BAIDU");
-    // var baiduWindow = window.open("https://www.baidu.com","baidu","height=400,width=400,resizable=yes");
+    // let baiduWindow = window.open("https://www.baidu.com","baidu","height=400,width=400,resizable=yes");
     // baiduWindow.moveTo(100,100);
 
-    // var timeout = setTimeout(function () {
+    // let timeout = setTimeout(function () {
     //     alert("Hello!");
     // },3000);
     // clearTimeout(timeout);
 
-    // var min = 0;
-    // var max = 10;
-    // var intervalId;
+    // let min = 0;
+    // let max = 10;
+    // let intervalId;
     // function increment() {
     //     min++;
     //     alert(min);
@@ -67,12 +67,13 @@
     //     alert("Sorry!");
     // }
 
-    // var prompt1 = prompt("What is your name?","");
+    // let prompt1 = prompt("What is your name?","");
     // if (prompt1 !== null){
     //     alert("Welcome, "+ prompt1);
     // }
 
-    window.find("百度");
+    let find = window.find("百度")
+
 </script>
 </body>
 </html>

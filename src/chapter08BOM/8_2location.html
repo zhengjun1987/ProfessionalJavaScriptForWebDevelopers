@@ -7,43 +7,42 @@
 <body>
 <script type="text/javascript" src="../chapter06oop/objects.js"></script>
 <script type="text/javascript">
-    var ownPropertyNames = Object.getOwnPropertyNames(location);
-    document.write("location = " + location + "<br>");
+    let ownPropertyNames = Object.getOwnPropertyNames(location)
+    document.write("location = " + location + "<br>")
     //http://localhost:63342/ProfessionalJavaScriptForWebDevelopers/src/chapter08BOM/8_2location.html?_ijt=1nbgdrnk2uddklo4raeqdk3d6i
-    document.write("location.hash = " + location.hash + "<br>");
-    document.write("location.protocol = " + location.protocol + "<br>");
-    document.write("location.href = " + location.href + "<br>");
-    document.write("location.host = " + location.host + "<br>");//localhost:63342
-    document.write("location.hostname = " + location.hostname + "<br>");//localhost
-    document.write("location.pathname = " + location.pathname + "<br>");//  /ProfessionalJavaScriptForWebDevelopers/src/chapter08BOM/8_2location.html
-    document.write("location.port = " + location.port + "<br>");//63342
-    document.write("location.search = " + location.search + "<br>");// ?_ijt=fmr7tklc4ct4fg8uch6f6mee21
-    document.write("ownPropertyNames = " + ownPropertyNames + "<br>");
+    document.write("location.hash = " + location.hash + "<br>")
+    document.write("location.protocol = " + location.protocol + "<br>")
+    document.write("location.href = " + location.href + "<br>")
+    document.write("location.host = " + location.host + "<br>")//localhost:63342
+    document.write("location.hostname = " + location.hostname + "<br>")//localhost
+    document.write("location.pathname = " + location.pathname + "<br>")//  /ProfessionalJavaScriptForWebDevelopers/src/chapter08BOM/8_2location.html
+    document.write("location.port = " + location.port + "<br>")//63342
+    document.write("location.search = " + location.search + "<br>")// ?_ijt=fmr7tklc4ct4fg8uch6f6mee21
+    document.write("ownPropertyNames = " + ownPropertyNames + "<br>")
 
     //ownPropertyNames = href,protocol,host,hostname,port,pathname,search,hash,origin,ancestorOrigins,assign,replace,reload,toString,valueOf
 
     function getQueryStringArgs() {
-        var qs = (location.search.length > 1) ? location.search.substring(1) : "";
-        var args = {};
-        var items = qs.length ? qs.split("&") : [];
+        let qs = (location.search.length > 1) ? location.search.substring(1) : ""
+        let args = {}
+        let items = qs.length ? qs.split("&") : []
         if (items.length === 0) {
-            return args;
+            return args
         }
-        for (var i = 0; i < items.length; i++) {
-            var strings = items[i].split("=");
-            args[decodeURIComponent(strings[0])] = decodeURIComponent(strings[1]);
+        for (let i = 0; i < items.length; i++) {
+            let strings = items[i].split("=")
+            args[decodeURIComponent(strings[0])] = decodeURIComponent(strings[1])
         }
-        return args;
+        return args
     }
 
-    document.write("getQueryStringArgs() = " + getQueryStringArgs().toString() + "<br>");//getQueryStringArgs() = Object{[_ijt] = tcuq7fapm5ckgtc7dmohhab9fq}
+    document.write("getQueryStringArgs() = " + getQueryStringArgs().toString() + "<br>")//getQueryStringArgs() = Object{[_ijt] = tcuq7fapm5ckgtc7dmohhab9fq}
 
     setTimeout(function () {
         // location.assign("https://www.baidu.com");
         // location.replace("https://www.baidu.com");//replace跳转后的页面无法返回
-
-        location.reload(true);//从服务器重新加载
-    },2000);
+        location.reload(true)//从服务器重新加载
+    }, 2000)
 </script>
 </body>
 </html>

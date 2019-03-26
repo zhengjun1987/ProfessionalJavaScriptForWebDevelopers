@@ -8,23 +8,23 @@
 <script type="text/javascript" src="objects.js"></script>
 <script>
     function createOriginal(original) {
-        var clone = Object.create(original);
-        clone.sourceFunction = "createOriginal";
+        let clone = Object.create(original)
+        clone.sourceFunction = "createOriginal"
         clone.sayHi = function () {
-            document.write("\"Hi\" = " + "Hi" + "<br>");
-        };
-        return clone;
+            document.write("\"Hi\" = " + "Hi" + "<br>")
+        }
+        return clone
     }
 
-    var person = {
-        name:"Alex",
-        friends:['Sheby','Van']
-    };
+    let person = {
+        name: "Alex",
+        friends: ['Sheby', 'Van']
+    }
 
-    var another = createOriginal(person);
-    document.write("another = " + another + "<br>");
+    let another = createOriginal(person)
+    document.write("another = " + another + "<br>")
     //another = [sourceFunction] = createOriginal, [sayHi] = function () { document.write("\"Hi\" = " + "Hi" + ""); }, [name] = Alex, [friends] = Sheby,Van
-    another.sayHi();
+    another.sayHi()
 </script>
 </body>
 </html>

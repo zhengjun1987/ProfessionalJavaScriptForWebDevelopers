@@ -6,7 +6,7 @@
 </head>
 <body>
 <script>
-    var pattern1 = /at/g;
+    let pattern1 = /at/g;
     document.write("pattern1.global = " + pattern1.global + "<br>");
     document.write("pattern1.ignoreCase = " + pattern1.ignoreCase + "<br>");
     document.write("pattern1.lastIndex = " + pattern1.lastIndex + "<br>");
@@ -17,7 +17,7 @@
     // pattern1.lastIndex = 0
     // pattern1.multiline = false
     // pattern1.source = at
-    var pattern2 = /[bc]at/i;
+    let pattern2 = /[bc]at/i;
     document.write("pattern2.global = " + pattern2.global + "<br>");
     document.write("pattern2.ignoreCase = " + pattern2.ignoreCase + "<br>");
     document.write("pattern2.lastIndex = " + pattern2.lastIndex + "<br>");
@@ -29,7 +29,7 @@
     // pattern2.multiline = false
     // pattern2.source = [bc]at
 
-    var pattern3 = /.at/gi;
+    let pattern3 = /.at/gi;
     document.write("pattern3.global = " + pattern3.global + "<br>");
     document.write("pattern3.ignoreCase = " + pattern3.ignoreCase + "<br>");
     document.write("pattern3.lastIndex = " + pattern3.lastIndex + "<br>");
@@ -41,7 +41,7 @@
     // pattern3.multiline = false
     // pattern3.source = .at
 
-    var pattern4 = /\.at/gi;
+    let pattern4 = /\.at/gi;
     document.write("pattern4.global = " + pattern4.global + "<br>");
     document.write("pattern4.ignoreCase = " + pattern4.ignoreCase + "<br>");
     document.write("pattern4.lastIndex = " + pattern4.lastIndex + "<br>");
@@ -53,29 +53,29 @@
     // pattern4.multiline = false
     // pattern4.source = \.at
 
-    var re = null;
-    for (var i = 0; i < 10; i++) {
+    let re = null;
+    for (let i = 0; i < 10; i++) {
         re = /cat/g;
-        var test = re.test("catastrophe");
+        let test = re.test("catastrophe");
     }
     document.write("test = " + test + "<br>");//test = true
 
-    for (var u = 0; u < 10; u++) {
+    for (let u = 0; u < 10; u++) {
         re = new RegExp("cat", "g");
-        var test1 = re.test("catastrophe");
+        let test1 = re.test("catastrophe");
     }
     document.write("test1 = " + test1 + "<br>");//test1 = true
 
-    var text = "mom and dad and baby";
-    var regExp = /mom( and dad( and baby)?)?/gi;
-    var matches = regExp.exec(text);
+    let text = "mom and dad and baby";
+    let regExp = /mom( and dad( and baby)?)?/gi;
+    let matches = regExp.exec(text);
     document.write("matches.index = " + matches.index + "<br>");
     document.write("matches.input = " + matches.input + "<br>");
     document.write("matches.length = " + matches.length + "<br>");
     // matches.index = 0
     // matches.input = mom and dad and baby
     // matches.length = 3
-    for (var i = 0; i < matches.length; i++) {
+    for (let i = 0; i < matches.length; i++) {
         document.write("matches[" + i + "] = " + matches[i] + "<br>");
     }
     // matches[0] = mom and dad and baby
